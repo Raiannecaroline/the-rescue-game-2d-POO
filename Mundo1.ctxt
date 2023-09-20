@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Mundo1
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ MyWorld\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=Mundo1()
+comment2.params=
+comment2.target=void\ act()
+comment3.params=novaCena
+comment3.target=void\ projetor(greenfoot.GreenfootImage)
+comment4.params=
+comment4.target=greenfoot.GreenfootImage\ proximaCena()
+comment5.params=
+comment5.target=greenfoot.GreenfootImage\ filme()
+comment6.params=proximoQuadro
+comment6.target=greenfoot.GreenfootImage\ imagemDoNovoQuadro(int)
+comment6.text=\r\n\ Apenas\ busca\ as\ novas\ filetas\ dentro\ do\ diret\u00F3rio\ de\ imagem\r\n
+numComments=7
