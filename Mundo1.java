@@ -2,29 +2,33 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Write a description of class MyWorld here.
- * 
- * @author (your name) 
+ *
+ * @author (your name)
  * @version (a version number or a date)
  */
 public class Mundo1 extends World
 {
-    public static final int LARGURA_CENARIO = 700; 
-    public static final int ALTURA_CENARIO = 390; 
-    public static final int QUANTIDADE_DE_QUADROS = 350; 
-    public static final int TAMANHO_DO_QUADRO = 4; 
-    public static final String NOME_ARQUIVO_IMAGEM = "cenarios/mundo1/m1f1_"; 
-    public static final String EXTENSAO_ARQUIVO_IMAGEM = ".png"; 
+    public static final int LARGURA_CENARIO = 700;
+    public static final int ALTURA_CENARIO = 390;
+    public static final int QUANTIDADE_DE_QUADROS = 350;
+    public static final int TAMANHO_DO_QUADRO = 4;
+    public static final String NOME_ARQUIVO_IMAGEM = "cenarios/mundo1/m1f1_";
+    public static final String EXTENSAO_ARQUIVO_IMAGEM = ".png";
 
     private int quadroAtual = 1;
-  
+
     public Mundo1()
-    {    
-        
+    {
+
         super(LARGURA_CENARIO, ALTURA_CENARIO, 1);
         GreenfootImage cenarioInicial = new GreenfootImage("mundo1.png");
         setBackground(cenarioInicial);
-        addObject(new Player(), 65, 318);
-        addObject(new Player2(), 100, 318);
+
+        Actor player1 = new Player(1);
+        Actor player2 = new Player(2);
+
+        addObject(player1, 65, 318);
+        addObject(player2, 100, 318);
 
     }
 
@@ -34,12 +38,12 @@ public class Mundo1 extends World
 
     }
 
-  
+
     private void projetor(GreenfootImage novaCena){
         setBackground(novaCena);
     }
 
-  
+
     private GreenfootImage proximaCena(){
         GreenfootImage novaCena = filme();
 
@@ -50,7 +54,7 @@ public class Mundo1 extends World
         return novaCena;
     }
 
-    
+
     private GreenfootImage filme(){
 
         GreenfootImage novaCena  =  new GreenfootImage(LARGURA_CENARIO,ALTURA_CENARIO);
