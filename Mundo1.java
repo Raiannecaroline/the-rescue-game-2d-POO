@@ -16,6 +16,7 @@ public class Mundo1 extends World
     public static final String EXTENSAO_ARQUIVO_IMAGEM = ".png"; 
 
     private int quadroAtual = 1;
+    private int cicloAtual = 0;
   
     public Mundo1()
     {    
@@ -24,13 +25,25 @@ public class Mundo1 extends World
         GreenfootImage cenarioInicial = new GreenfootImage("mundo1.png");
         setBackground(cenarioInicial);
         addObject(new Player(), 65, 318);
-        addObject(new Player2(), 100, 318);
+        
 
     }
+
+     public int cicloAtual(){
+        return cicloAtual;
+     }
+
+     private void contaCiclo(){
+        cicloAtual++;
+        if(cicloAtual >1000){
+            cicloAtual=0;
+        }
+     }
 
     public void act(){
 
         projetor(proximaCena());
+        contaCiclo();
 
     }
 

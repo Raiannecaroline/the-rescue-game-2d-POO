@@ -9,6 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Player extends Actor
 {
     public int proximoPasso = 6;
+    public static final int TAXA_DE_ATUALIZACAO =6;
     
     
     
@@ -22,10 +23,18 @@ public class Player extends Actor
         
         setImage(new GreenfootImage("player/player-1-"+proximoPasso+".png"));
     
-        proximoPasso++;
+        if(possoAtualizar()){
+            proximoPasso++;
+        }
         if(proximoPasso > 10){
+            
             proximoPasso = 6;
         }
     } 
+
+    private boolean possoAtualizar(){
+        Mundo1 mundo = (Mundo1) getWorld();
+        return(mundo.cicloAtual()% TAXA_DE_ATUALIZACAO)==0;
+    }
     
 }
