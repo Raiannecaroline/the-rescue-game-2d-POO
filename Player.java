@@ -57,7 +57,7 @@ public class Player extends Actor {
     
     public void disparo(){
         Tiro tiro = new Tiro();
-        if(Greenfoot.isKeyDown(Atirar)){
+        if(Atirar.equals(Greenfoot.getKey())){
             getWorld().addObject(tiro,getX(),getY());
         }
         
