@@ -14,10 +14,12 @@ public class Player extends Actor {
     public String Direita = "null";
     public String Esquerda = "null";
     public String Pular = "null";
+    public String Atirar = "null";
+    
     
 
-    public static int TAXA_DE_ATUALIZACAO = 4;
-    public static final int ALTURA_MAXIMA_PULO = 8;
+    public static int TAXA_DE_ATUALIZACAO = 2;
+    public static final int ALTURA_MAXIMA_PULO = 6;
 
     public boolean estaEmTerraFirme = true;
     public boolean estaEmPulo = false;
@@ -30,17 +32,19 @@ public class Player extends Actor {
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
 
-    public Player(int identificadorPlayer,String Direita,String Esquerda,String Pular) {
+    public Player(int identificadorPlayer,String Direita,String Esquerda,String Pular,String Atirar) {
         super();
         this.identificadorPlayer = identificadorPlayer;
         this.Direita = Direita;
         this.Esquerda = Esquerda;
         this.Pular = Pular;
+        this.Atirar = Atirar;
     }
 
     public void act()
     {
         movimentacao();
+        disparo();
       
       
       
@@ -49,6 +53,14 @@ public class Player extends Actor {
 
 
 
+    }
+    
+    public void disparo(){
+        Tiro tiro = new Tiro();
+        if(Greenfoot.isKeyDown(Atirar)){
+            getWorld().addObject(tiro,getX(),getY());
+        }
+        
     }
 
     private void gerenciamentoDoPulo(){
@@ -137,6 +149,7 @@ public class Player extends Actor {
     private void executaPousoDoPulo() {
         if (alturaAtualDoPulo == 0 && !estaEmPulo) {
             estaEmTerraFirme = true;
+            
 
         }
 
@@ -147,7 +160,7 @@ public class Player extends Actor {
     }
 
     public int alturaAtual() {
-        return (alturaDosPes() - Mundo1.NIVEL_DO_SOLO) * -1;
+        return ((alturaDosPes()-20) - Mundo1.NIVEL_DO_SOLO) * -1;
     }
 
     private boolean possoAtualizar() {

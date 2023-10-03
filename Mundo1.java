@@ -10,11 +10,11 @@ public class Mundo1 extends World
 {
     public static final int LARGURA_CENARIO = 700;
     public static final int ALTURA_CENARIO = 390;
-    public static final int QUANTIDADE_DE_QUADROS = 350;
-    public static final int NIVEL_DO_SOLO = 339; 
-    public static final int FORCA_DE_GRAVIDADE = 5; 
-    public static final int TAMANHO_DO_QUADRO = 4;
-    public static final String NOME_ARQUIVO_IMAGEM = "cenarios/mundo1/m1f1_";
+    public static final int QUANTIDADE_DE_QUADROS = 100;
+    public static final int NIVEL_DO_SOLO = 336; 
+    public static final int FORCA_DE_GRAVIDADE = 7; 
+    public static final int TAMANHO_DO_QUADRO = 5;
+    public static final String NOME_ARQUIVO_IMAGEM = "cenarios/CenariomovimentIlha/cenario_";
     public static final String EXTENSAO_ARQUIVO_IMAGEM = ".png";
 
     private int quadroAtual = 1;
@@ -29,15 +29,24 @@ public class Mundo1 extends World
         super(LARGURA_CENARIO, ALTURA_CENARIO, 1);
         GreenfootImage cenarioInicial = new GreenfootImage("mundo1.png");
         setBackground(cenarioInicial);
-        heroi = new Player(1,"right","left","up");
-        heroi2 = new Player(2,"d","a","w");
-        addObject(heroi, 65, 318);
-        addObject(heroi2, 80, 318);
-        //addObject(new LHorizontal(),80, heroi2.alturaDosPes());
+        heroi = new Player(1,"right","left","up","enter");
+        heroi2 = new Player(2,"d","a","w","t");
+        addObject(heroi, 60, 336);
+        addObject(heroi2, 80, 336);
+       
+        prepare();
         
-        //addObject(new LHorizontal(),65, heroi.alturaDosPes());
+       
+
 
     }
+    public void prepare()
+{
+    Sound backgroundMusic = new Sound();
+    addObject(backgroundMusic, 0, 0);
+     backgroundMusic.play();
+}
+
 
     public  void aplicarForcaDaGravidade(){
         if(heroi.alturaAtual() > 0){
