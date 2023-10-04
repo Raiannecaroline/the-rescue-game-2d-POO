@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.List;
 /**
  * Write a description of class MyWorld here.
  *
@@ -21,6 +21,8 @@ public class Mundo1 extends World
     private int cicloAtual = 0;
     private Player heroi;
     private Player heroi2;
+    
+   
   
 
     public Mundo1()
@@ -29,16 +31,32 @@ public class Mundo1 extends World
         super(LARGURA_CENARIO, ALTURA_CENARIO, 1);
         GreenfootImage cenarioInicial = new GreenfootImage("mundo1.png");
         setBackground(cenarioInicial);
-        heroi = new Player(1,"right","left","up","enter");
-        heroi2 = new Player(2,"d","a","w","t");
+        heroi = new Player(1,"right","left","0","enter","up");
+        heroi2 = new Player(2,"d","a","space","t","w");
+        
+
+       
+        
         addObject(heroi, 60, 336);
         addObject(heroi2, 80, 336);
+        
+        
        
-        prepare();
+       
+        //prepare();
         
        
 
 
+    }
+    
+    public void DroparInimigo(){
+        
+          int DropInimigo = Greenfoot.getRandomNumber(50);
+        if(DropInimigo == 1){
+            Enemy inimigo1 = new Enemy();
+             addObject(inimigo1,699, 340);
+                     }
     }
     public void prepare()
 {
@@ -76,6 +94,7 @@ public class Mundo1 extends World
         projetor(proximaCena());
         aplicarForcaDaGravidade();
         contaCiclo();
+        DroparInimigo();
         
     }
 
