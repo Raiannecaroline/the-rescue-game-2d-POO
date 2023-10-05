@@ -6,9 +6,9 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Player extends Actor {
-    public static final String NOME_ARQUIVO_IMAGEM = "player/player-";
-    public static final String EXTENSAO_ARQUIVO_IMAGEM = ".png";
+public class Player extends Personagem {
+    public  String NOME_ARQUIVO_IMAGEM = "player/player-";
+    public  String EXTENSAO_ARQUIVO_IMAGEM = ".png";
 
     public int proximoPasso = 1;
     public String Direita = "null";
