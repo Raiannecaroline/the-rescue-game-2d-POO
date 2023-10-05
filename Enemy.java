@@ -10,31 +10,25 @@ import java.util.List;
 public class Enemy extends Personagem {
 
     public int vida = 5;
-   
+
     private int raioDeteccao = 700;
     private int raioAtaque = 200;
     private int DropInimigo = Greenfoot.getRandomNumber(10);
     private Personagem animacao;
-    
-    
-    public Enemy(){
-        
-         super("enemys/enemys-1", ".png",2,0,3,0); 
 
-     }
-    
-      
-    public void UsarAnimacao(){
-         
+    public Enemy() {
+
+        super("enemys/enemys-1", ".png", 2, 0, 3, 0);
+
+    }
+
+    public void UsarAnimacao() {
+
         animacao.Animacao();
     }
 
-   
-
     public void act() {
         super.act();
-       
-        
 
         movimentacao();
         disparoInimigo();
@@ -67,7 +61,7 @@ public class Enemy extends Personagem {
     }
 
     private void movimentacao() {
-        //UsarAnimacao();
+        // UsarAnimacao();
 
         if (isInRange()) {
             move(direcaoMovimento());
@@ -120,6 +114,5 @@ public class Enemy extends Personagem {
     public List<Player> getListaDePlayers() {
         return getObjectsInRange(raioDeteccao, Player.class);
     }
-
 
 }
