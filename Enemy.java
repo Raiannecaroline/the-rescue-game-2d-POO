@@ -23,12 +23,6 @@ public class Enemy extends Personagem {
 
      }
     
-      
-    public void UsarAnimacao(){
-         
-        animacao.Animacao();
-    }
-
    
 
     public void act() {
