@@ -16,11 +16,13 @@ public class Mundo1 extends World {
     public static final int TAMANHO_DO_QUADRO = 5;
     public static final String NOME_ARQUIVO_IMAGEM = "cenarios/CenariomovimentIlha/cenario_";
     public static final String EXTENSAO_ARQUIVO_IMAGEM = ".png";
+    public static final int TAMANHO_DO_PLACAR = 30;
 
     private int quadroAtual = 1;
     private int cicloAtual = 0;
     private Player heroi;
     private Player heroi2;
+    private Placar placar;
 
     public Mundo1() {
 
@@ -29,12 +31,22 @@ public class Mundo1 extends World {
         setBackground(cenarioInicial);
         heroi = new Player(1, "right", "left", "0", "enter", "up");
         heroi2 = new Player(2, "d", "a", "space", "t", "w");
+        placar = new Placar(0, TAMANHO_DO_PLACAR);
 
         addObject(heroi, 60, 336);
         addObject(heroi2, 80, 336);
+        addObject(placar, 50, 10);
 
         // prepare();
 
+    }
+
+    @Override
+    public void removeObject(Actor object) {
+        if (object instanceof Enemy && !(object instanceof AtaqueInimigo)) {
+            placar.atualizaPlacar();
+        }
+        super.removeObject(object);
     }
 
     public void DroparInimigo() {
