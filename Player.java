@@ -7,11 +7,8 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public class Player extends Personagem {
-<<<<<<< HEAD
-=======
     public String NOME_ARQUIVO_IMAGEM = "player/player-";
     public String EXTENSAO_ARQUIVO_IMAGEM = ".png";
->>>>>>> 891dec761ff551889055cedce5f3bc7051b69f78
 
     public int proximoPasso = 1;
     public String Direita = "null";
@@ -28,16 +25,7 @@ public class Player extends Personagem {
     public boolean estaEmPulo = false;
     public int alturaAtualDoPulo = 0;
 
-<<<<<<< HEAD
-    private int identificadorPlayer = 0;
-    
-    public Personagem animacao;
-    
-   
-    
-=======
     private int identificadorPlayer;
->>>>>>> 891dec761ff551889055cedce5f3bc7051b69f78
 
     public Player() {
 
@@ -51,21 +39,9 @@ public class Player extends Personagem {
         this.Pular = Pular;
         this.Atirar = Atirar;
         this.Cima = Cima;
-        
-    }
-   public Player(){
-     super("player/player-", ".png",2,1,6,1);
-        
     }
 
-<<<<<<< HEAD
-    public void act()
-    {
-        super.act();
-        animacao.Animacao();
-=======
     public void act() {
->>>>>>> 891dec761ff551889055cedce5f3bc7051b69f78
         movimentacao();
         disparo();
 
@@ -90,20 +66,6 @@ public class Player extends Personagem {
 
     private void disparo() {
         Tiro tiro = new Tiro();
-<<<<<<< HEAD
-        if(Greenfoot.isKeyDown(Atirar)){
-            if(tiro.latencia == 1){
-            getWorld().addObject(tiro,getX()+5,getY());
-            if(Greenfoot.isKeyDown(Cima) && Greenfoot.isKeyDown(Direita)){
-            tiro.setRotation(-45);
-           
-        
-        }   
-        if(Greenfoot.isKeyDown(Cima)&& !Greenfoot.isKeyDown(Direita)){
-            tiro.setRotation(-90);
-        
-        }  
-=======
         if (Greenfoot.isKeyDown(Atirar)) {
             if (tiro.latencia == 1) {
                 getWorld().addObject(tiro, getX() + 5, getY());
@@ -116,7 +78,6 @@ public class Player extends Personagem {
 
                 }
             }
->>>>>>> 891dec761ff551889055cedce5f3bc7051b69f78
         }
     }
 
@@ -129,17 +90,6 @@ public class Player extends Personagem {
         executaPousoDoPulo();
 
     }
-<<<<<<< HEAD
-    private void capturaInicoDoPulo(){
-        
-       if(alturaAtual()!=0 ){
-        if(Greenfoot.isKeyDown(Pular)){
-            
-            estaEmTerraFirme = false;
-            estaEmPulo = true;
-            
-        
-=======
 
     private void capturaInicoDoPulo() {
 
@@ -150,18 +100,12 @@ public class Player extends Personagem {
                 estaEmPulo = true;
 
             }
->>>>>>> 891dec761ff551889055cedce5f3bc7051b69f78
         }
     }
 
-<<<<<<< HEAD
-    private void movimentacao(){
-        
-=======
     private void movimentacao() {
 
         gerenciamentoDaCaminhada();
->>>>>>> 891dec761ff551889055cedce5f3bc7051b69f78
         gerenciamentoDoPulo();
         if (Greenfoot.isKeyDown(Direita)) {
             move(2);
@@ -173,9 +117,6 @@ public class Player extends Personagem {
         }
     }
 
-<<<<<<< HEAD
-  
-=======
     private void gerenciamentoDaCaminhada() {
 
         setImage(new GreenfootImage(
@@ -190,7 +131,6 @@ public class Player extends Personagem {
         }
 
     }
->>>>>>> 891dec761ff551889055cedce5f3bc7051b69f78
 
     private void executaSubidaDoPulo() {
         if (alturaAtualDoPulo < ALTURA_MAXIMA_PULO && estaEmPulo) {
@@ -233,9 +173,6 @@ public class Player extends Personagem {
         return ((alturaDosPes() - 20) - Mundo1.NIVEL_DO_SOLO) * -1;
     }
 
-<<<<<<< HEAD
-  
-=======
     private boolean possoAtualizar() {
         Mundo1 mundo = (Mundo1) getWorld();
         return (mundo.cicloAtual() % TAXA_DE_ATUALIZACAO) == 0;
@@ -245,6 +182,5 @@ public class Player extends Personagem {
         Mundo1 mundo = (Mundo1) getWorld();
         return (mundo.cicloAtual() % 106) == 0;
     }
->>>>>>> 891dec761ff551889055cedce5f3bc7051b69f78
 
 }

@@ -16,11 +16,6 @@ public class Enemy extends Personagem {
     private int DropInimigo = Greenfoot.getRandomNumber(10);
     private Personagem animacao;
 
-<<<<<<< HEAD
-     }
-    
-   
-=======
     public Enemy() {
 
         super("enemys/enemys-1", ".png", 2, 0, 3, 0);
@@ -31,7 +26,6 @@ public class Enemy extends Personagem {
 
         animacao.Animacao();
     }
->>>>>>> 891dec761ff551889055cedce5f3bc7051b69f78
 
     public void act() {
         super.act();
@@ -118,6 +112,7 @@ public class Enemy extends Personagem {
     }
 
     public List<Player> getListaDePlayers() {
+
         return getObjectsInRange(raioDeteccao, Player.class);
     }
 

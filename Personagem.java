@@ -39,7 +39,6 @@ public class Personagem extends Actor {
     }
 
     public void act() {
-        
         contaCiclo();
 
         Animacao();
