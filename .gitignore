@@ -4,3 +4,6 @@
 
 # BlueJ files
 *.ctxt
+
+### VSCode ###
+*.vscode
