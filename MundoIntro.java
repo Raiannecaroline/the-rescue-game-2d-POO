@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MundoIntro extends World
 {
-    public static int timer = 1000;
+    public static int timer = 500;
     static GreenfootSound mundoIntro = new GreenfootSound("intro-tema.mp3");
     /**
      * Constructor for objects of class MundoIntro.
@@ -22,8 +22,8 @@ public class MundoIntro extends World
     }
     
     public void act() {
-        if (timer > 900) {
-            setBackground(new GreenfootImage("intro-cenario-1.png"));
+        if (timer > 400) {
+            setBackground(new GreenfootImage("intro_1.png"));
         }
         timer--;
         if (timer == 0) {

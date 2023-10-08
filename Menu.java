@@ -17,26 +17,27 @@ public class Menu extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(700, 390, 1);
-        setBackground("menu-01" + tela + ".png");
-        MundoIntro.timer = 1000;
+        setBackground("menu_0"+tela+".png");
+        MundoIntro.timer = 500;
     }
     public void act(){
         String key = Greenfoot.getKey();
         if(("s".equals(key) || "down".equals(key))){
             if(tela == 3){tela = 1;}
             else{tela++;}
-            setBackground("menu-01" + tela + ".png");
+            setBackground("menu_0"+tela+".png");
         }
         if(("w".equals(key) || "down".equals(key))){
             if(tela == 1){tela = 3;}
             else{tela--;}
-            setBackground("menu-01" + tela + ".png");
+            setBackground("menu_0"+tela+".png");
         }
         
         if("enter".equals(key)){
             switch(tela){
-                case 1:Greenfoot.setWorld(new Mundo1());break;                                     
-                case 2:Greenfoot.stop();break;
+                case 1:Greenfoot.setWorld(new Mundo1());break;
+                case 2:Greenfoot.setWorld(new Creditos());    break;                
+                case 3:Greenfoot.stop();                      break;
             }
         }   
     }
