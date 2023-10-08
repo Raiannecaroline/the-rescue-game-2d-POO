@@ -67,6 +67,7 @@ public class Player extends Personagem {
     private void disparo() {
         DisparoPlayer tiro = new DisparoPlayer();
         if (Greenfoot.isKeyDown(Atirar)) {
+            tiro.playSomDisparo();
             if (tiro.latencia == 1) {
                 getWorld().addObject(tiro, getX() + 5, getY());
                 if (Greenfoot.isKeyDown(Cima) && Greenfoot.isKeyDown(Direita)) {
