@@ -4,6 +4,7 @@ public abstract class Disparo extends Actor {
     private int alcance = Greenfoot.getRandomNumber(10) + 30;
     private int dano = 1;
     public int latencia = Greenfoot.getRandomNumber(3);
+    private GreenfootSound somDisparo = new GreenfootSound("NES - Contra - Effects/Contra SFX (1).wav");
 
     public void atirando(java.lang.Class<?> alvo) {
         int direcaoDisparo = 12;
@@ -24,5 +25,11 @@ public abstract class Disparo extends Actor {
     public boolean Latencia() {
         Mundo1 mundo = (Mundo1) getWorld();
         return (mundo.cicloAtual() % latencia) == 0;
+    }
+
+    public void playSomDisparo(){
+        if (!somDisparo.isPlaying()) {
+            somDisparo.play();
+        }
     }
 }

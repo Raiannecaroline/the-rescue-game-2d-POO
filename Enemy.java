@@ -51,6 +51,7 @@ public class Enemy extends Personagem {
     private void disparoInimigo() {
 
         DisparoEnemy ataque = new DisparoEnemy();
+        ataque.playSomDisparo();
         if (ataque.latencia == 1) {
             getWorld().addObject(ataque, getX(), getY());
         }
