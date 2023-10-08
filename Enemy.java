@@ -15,6 +15,7 @@ public class Enemy extends Personagem {
     private int raioAtaque = 200;
     private int DropInimigo = Greenfoot.getRandomNumber(10);
     private Personagem animacao;
+    private List<DisparoPlayer> disparosSofridos;
 
     public Enemy() {
 
@@ -30,31 +31,26 @@ public class Enemy extends Personagem {
     public void act() {
         super.act();
 
-        movimentacao();
-        disparoInimigo();
+        //movimentacao();
+        //disparoInimigo();
+        setListaDisparosSofridos();
         morte();
 
     }
 
     private void morte() {
-        java.util.List<Tiro> tiros = getIntersectingObjects(Tiro.class);
-
-        for (Tiro tiro : tiros) {
-            // Verifica se o objeto é uma instância da classe Player
-            if (tiro.getClass() == Tiro.class) {
-                vida--;
-                if (vida == 0) {
-                    getWorld().removeObject(this);
-
-                }
+        if (isTouching(DisparoPlayer.class)) {
+            removeTouching(DisparoPlayer.class);
+            vida--;
+            if (vida == 0) {
+                getWorld().removeObject(this);
             }
         }
-
     }
 
     private void disparoInimigo() {
 
-        AtaqueInimigo ataque = new AtaqueInimigo();
+        DisparoEnemy ataque = new DisparoEnemy();
         if (ataque.latencia == 1) {
             getWorld().addObject(ataque, getX(), getY());
         }
@@ -113,6 +109,14 @@ public class Enemy extends Personagem {
 
     public List<Player> getListaDePlayers() {
         return getObjectsInRange(raioDeteccao, Player.class);
+    }
+
+    public List<DisparoPlayer> getListaDisparosSofridos() {
+        return this.disparosSofridos;
+    }
+
+    public void setListaDisparosSofridos() {
+        this.disparosSofridos = getIntersectingObjects(DisparoPlayer.class);
     }
 
 }

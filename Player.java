@@ -48,11 +48,11 @@ public class Player extends Personagem {
     }
 
     private void morte() {
-        java.util.List<AtaqueInimigo> ataques = getIntersectingObjects(AtaqueInimigo.class);
+        java.util.List<DisparoEnemy> ataques = getIntersectingObjects(DisparoEnemy.class);
 
-        for (AtaqueInimigo ataque : ataques) {
+        for (DisparoEnemy ataque : ataques) {
             // Verifica se o objeto é uma instância da classe Player
-            if (ataque.getClass() == AtaqueInimigo.class) {
+            if (ataque.getClass() == DisparoEnemy.class) {
                 vidas--;
 
                 if (vidas == 0) {
@@ -65,7 +65,7 @@ public class Player extends Personagem {
     }
 
     private void disparo() {
-        Tiro tiro = new Tiro();
+        DisparoPlayer tiro = new DisparoPlayer();
         if (Greenfoot.isKeyDown(Atirar)) {
             if (tiro.latencia == 1) {
                 getWorld().addObject(tiro, getX() + 5, getY());

@@ -1,27 +1,21 @@
-import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.List;
+import greenfoot.*;
 
-/**
- * Write a description of class tiro here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
-public class Tiro extends Player {
+public abstract class Disparo extends Actor {
     private int alcance = Greenfoot.getRandomNumber(10) + 30;
     private int dano = 1;
     public int latencia = Greenfoot.getRandomNumber(3);
 
-    public void act() {
-        atirando();
-    }
+    public void atirando(java.lang.Class<?> alvo) {
+        int direcaoDisparo = 12;
 
-    public void atirando() {
+        if (alvo == Player.class) {
+            direcaoDisparo = -12;
+        }
 
         alcance--;
-        move(12);
+        move(direcaoDisparo);
         // Verifica se existem objetos da classe Player no mundo
-        if (alcance == 0 || isAtEdge() || isTouching(Enemy.class)) {
+        if (alcance == 0 || isAtEdge()) {
             getWorld().removeObject(this);
 
         }
@@ -31,5 +25,4 @@ public class Tiro extends Player {
         Mundo1 mundo = (Mundo1) getWorld();
         return (mundo.cicloAtual() % latencia) == 0;
     }
-
 }

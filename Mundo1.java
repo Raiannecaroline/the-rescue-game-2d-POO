@@ -43,7 +43,7 @@ public class Mundo1 extends World {
 
     @Override
     public void removeObject(Actor object) {
-        if (object instanceof Enemy && !(object instanceof AtaqueInimigo)) {
+        if (object instanceof Enemy) {
             placar.atualizaPlacar();
         }
         super.removeObject(object);
