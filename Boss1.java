@@ -40,7 +40,7 @@ public class Boss1 extends Personagem {
             vida--;
             if (vida == 0) {
                 getWorld().removeObject(this);
-                Greenfoot.setWorld(new Menu());
+                Greenfoot.setWorld(new Mundo2());
             }
         }
         

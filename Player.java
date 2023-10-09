@@ -17,6 +17,9 @@ public class Player extends Personagem {
     public String Atirar;
     public String Cima;
     public int vidas = 5;
+    public int timer = 0;
+    private int cicloAtual = 0;
+
 
     public static int TAXA_DE_ATUALIZACAO = 2;
     public static final int ALTURA_MAXIMA_PULO = 6;
@@ -27,7 +30,7 @@ public class Player extends Personagem {
 
     protected int identificadorPlayer;
     private boolean atirando = false;
-    public boolean morte = false;
+    public boolean morte1;
 
 
      private Vida BarraDevida1;
@@ -38,6 +41,7 @@ public class Player extends Personagem {
 
     public Player(int vidas) {
        this.vidas = vidas;
+       morte1 = false;
 
          // Valor inicial da vida do personagem
 
@@ -71,30 +75,45 @@ public class Player extends Personagem {
     }
 
     public void act() {
+        
 
         morte();
         movimentacao();
         disparo();
-
+    
 
     }
 
     private void morte() {
 
-        if (getWorld() != null){
+         
+                       
+                         
+                      
             if (isTouching(DisparoEnemy.class)) {
                 removeTouching(DisparoEnemy.class);
                 vidas--;
 
                 if (vidas == 0) {
-                    morte = true;
+                    if(getWorld()== null ) {
+                          Greenfoot.setWorld(new GameOver());
+                        }  
+                        
+                    morte1 = true;
+                    
+                     getWorld().removeObject(this);
+                     
+                   
 
-                    getWorld().removeObject(this);
+                    }
+                        
+                    
 
-                }
-
-            }
-        }
+            
+                       
+        }  
+   
+    
     }
 
     public void disparo() {
@@ -163,16 +182,16 @@ public class Player extends Personagem {
     }
 
     private void movimentacao() {
-        if (!morte) {
+        if (!morte1) {
 
             gerenciamentoDaCaminhada();
             gerenciamentoDoPulo();
             if (Greenfoot.isKeyDown(Direita)) {
-                move(2);
+                move(3);
                 setRotation(0);
             }
             if (Greenfoot.isKeyDown(Esquerda)) {
-                move(-2);
+                move(-3);
                 setRotation(0);
             }
         }
@@ -238,13 +257,40 @@ return;
 
     private boolean possoAtualizar() {
 
-        Mundo1 mundo = (Mundo1) getWorld();
-        return (mundo.cicloAtual() % TAXA_DE_ATUALIZACAO) == 0;
+        
+        return (cicloAtual() % TAXA_DE_ATUALIZACAO) == 0;
     }
+    
+    public int cicloAtual() {
+        return cicloAtual;
+    }
+
+    private void contaCiclo() {
+        cicloAtual++;
+        if((cicloAtual() % 16) == 0){
+            timer++;
+        }
+        if (cicloAtual > 2000) {
+            cicloAtual = 0;
+        }
+    }
+    
 
     private boolean timer() {
         Mundo1 mundo = (Mundo1) getWorld();
         return (mundo.cicloAtual() % 106) == 0;
     }
+    public boolean existemObjetosDaClasse(Class classeDesejada) {
+    World mundo = getWorld(); // Obtém o mundo atual
+
+    // Percorre todos os objetos no mundo
+    for (Object objeto : mundo.getObjects(null)) {
+        if (objeto.getClass() == classeDesejada) {
+            return true; // Encontrou pelo menos um objeto da classe
+        }
+    }
+
+    return false; // Não encontrou objetos da classe
+}
 
 }

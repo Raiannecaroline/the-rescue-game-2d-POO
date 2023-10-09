@@ -80,11 +80,11 @@ public class Mundo1 extends World {
             addObject(inimigo1, 699, 340);
 
         }
-         if (DropInimigoCeu == 1 && timer<250) {
+         if (DropInimigoCeu == 1 && timer<5) {
             EnemyAir Air = new EnemyAir();
             addObject(Air, 699, 150);
         }
-         if (timer == 250 ) {
+         if (timer == 5 ) {
             Boss1 boss = new Boss1();
             addObject(boss, 699, 50);
         }
@@ -98,14 +98,14 @@ public class Mundo1 extends World {
 
     public void aplicarForcaDaGravidade() {
 
-        if (heroi.morte ==false){
+        if (heroi.morte1 ==false){
         if (heroi.alturaAtual() > 0 ) {
             heroi.setLocation(heroi.getX(), heroi.getY() + FORCA_DE_GRAVIDADE);
 
 
         }
     }
-    if (heroi2.morte ==false){
+    if (heroi2.morte1 ==false){
         if (heroi2.alturaAtual() > 0) {
             heroi2.setLocation(heroi2.getX(), heroi2.getY() + FORCA_DE_GRAVIDADE);
 
@@ -114,6 +114,7 @@ public class Mundo1 extends World {
 
     }
     }
+
 
     public int cicloAtual() {
         return cicloAtual;
