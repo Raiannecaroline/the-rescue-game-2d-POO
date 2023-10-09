@@ -27,6 +27,7 @@ public class Mundo1 extends World {
 
 
     public int timer = 0;
+     public int timerBoss = 250;
 
 
     public Mundo1() {
@@ -80,11 +81,11 @@ public class Mundo1 extends World {
             addObject(inimigo1, 699, 340);
 
         }
-         if (DropInimigoCeu == 1 && timer<5) {
+         if (DropInimigoCeu == 1 && timer<timerBoss) {
             EnemyAir Air = new EnemyAir();
             addObject(Air, 699, 150);
         }
-         if (timer == 5 ) {
+         if (timer == timerBoss ) {
             Boss1 boss = new Boss1();
             addObject(boss, 699, 50);
         }
