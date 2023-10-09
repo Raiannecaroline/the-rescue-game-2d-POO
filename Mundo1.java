@@ -60,7 +60,7 @@ public class Mundo1 extends World {
 
 
 
-        //prepare();
+        prepare();
     }
 
     @Override
@@ -93,7 +93,6 @@ public class Mundo1 extends World {
 
     public void prepare() {
         Sound backgroundMusic = new Sound();
-        addObject(backgroundMusic, 0, 0);
         backgroundMusic.play();
     }
 
