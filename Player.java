@@ -11,12 +11,12 @@ public class Player extends Personagem {
     public String EXTENSAO_ARQUIVO_IMAGEM = ".png";
 
     public int proximoPasso = 1;
-    public String Direita = "null";
-    public String Esquerda = "null";
-    public String Pular = "null";
-    public String Atirar = "null";
-    public String Cima = "null";
-    public int vidas =100;
+    public String Direita;
+    public String Esquerda;
+    public String Pular;
+    public String Atirar;
+    public String Cima;
+    public int vidas = 5;
 
     public static int TAXA_DE_ATUALIZACAO = 2;
     public static final int ALTURA_MAXIMA_PULO = 6;
@@ -28,25 +28,25 @@ public class Player extends Personagem {
     protected int identificadorPlayer;
     private boolean atirando = false;
     public boolean morte = false;
- 
- 
+
+
      private Vida BarraDevida1;
      private Vida BarraDevida2;
-     
 
- 
+
+
 
     public Player(int vidas) {
        this.vidas = vidas;
-       
+
          // Valor inicial da vida do personagem
-       
-       
+
+
 
     }
-     
-    
-    
+
+
+
     public Player(int vidas,int identificadorPlayer) {
         this.vidas = vidas;
         this.identificadorPlayer = identificadorPlayer;
@@ -58,7 +58,7 @@ public class Player extends Personagem {
     public int getIdentificadorPlayer(){
         return identificadorPlayer;
     }
-    
+
 
     public Player(int identificadorPlayer, String Direita, String Esquerda, String Pular, String Atirar, String Cima) {
         super();
@@ -71,39 +71,30 @@ public class Player extends Personagem {
     }
 
     public void act() {
-       
-       
-            
-        
-        
-        if (getWorld() != null){
-         if (this.isTouching(DisparoEnemy.class)) {
-                vidas--;
-                
 
-                if (vidas == 0) {
-                    morte =true;
-                   
-                    getWorld().removeObject(this);
-                    
-                    return;
-                    
-
-                }
-                
-            
-        }
+        morte();
         movimentacao();
         disparo();
-    }
+
 
     }
 
     private void morte() {
-       
-            // Verifica se o objeto é uma instância da classe Player
-           
 
+        if (getWorld() != null){
+            if (isTouching(DisparoEnemy.class)) {
+                removeTouching(DisparoEnemy.class);
+                vidas--;
+
+                if (vidas == 0) {
+                    morte = true;
+
+                    getWorld().removeObject(this);
+
+                }
+
+            }
+        }
     }
 
     public void disparo() {
@@ -172,18 +163,20 @@ public class Player extends Personagem {
     }
 
     private void movimentacao() {
+        if (!morte) {
 
-        gerenciamentoDaCaminhada();
-        gerenciamentoDoPulo();
-        if (Greenfoot.isKeyDown(Direita)) {
-            move(2);
-            setRotation(0);
+            gerenciamentoDaCaminhada();
+            gerenciamentoDoPulo();
+            if (Greenfoot.isKeyDown(Direita)) {
+                move(2);
+                setRotation(0);
+            }
+            if (Greenfoot.isKeyDown(Esquerda)) {
+                move(-2);
+                setRotation(0);
+            }
         }
-        if (Greenfoot.isKeyDown(Esquerda)) {
-            move(-2);
-            setRotation(0);
-        }
-        return;
+
     }
 
     private void gerenciamentoDaCaminhada() {
@@ -236,7 +229,7 @@ return;
 
     public int alturaDosPes() {
         return getY() + getImage().getHeight() / 2;
-        
+
     }
 
     public int alturaAtual() {
@@ -244,6 +237,7 @@ return;
     }
 
     private boolean possoAtualizar() {
+
         Mundo1 mundo = (Mundo1) getWorld();
         return (mundo.cicloAtual() % TAXA_DE_ATUALIZACAO) == 0;
     }

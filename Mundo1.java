@@ -24,39 +24,44 @@ public class Mundo1 extends World {
     private Player heroi;
     private Player heroi2;
     private Placar placar;
-     private Vida barraDeVida;
-     
+
+
     public int timer = 0;
-    
+
 
     public Mundo1() {
-        
+
 
         super(LARGURA_CENARIO, ALTURA_CENARIO, 1);
-         
+
         GreenfootImage cenarioInicial = new GreenfootImage("mundo1.png");
         setBackground(cenarioInicial);
         heroi = new Player(1, "right", "left", "0", "enter", "up");
         heroi2 = new Player(2, "d", "a", "space", "t", "w");
         placar = new Placar(0, TAMANHO_DO_PLACAR);
-       
-       barraDeVida = new Vida(heroi2.vidas); // Cria uma instância de Vida com a vida do jogador
-        addObject(barraDeVida, 100, 30);
+
+        Placar placarVidaHeroi = new PlacarVida(heroi, TAMANHO_DO_PLACAR);
+        Placar placarVidaHeroi2 = new PlacarVida(heroi2, TAMANHO_DO_PLACAR);
+        Vida vidaHeroi = new Vida(heroi);
+        Vida vidaHeroi2 = new Vida(heroi2);
+
+        addObject(vidaHeroi, 10, 25);
+        addObject(vidaHeroi2, 690, 25);
+        addObject(placarVidaHeroi, 25, 25);
+        addObject(placarVidaHeroi2, 675, 25);
 
         addObject(heroi, 60, 336);
         addObject(heroi2, 80, 336);
         addObject(placar, 50, 10);
-        
-       
-         
-        
-       
+
+
+
+
+
 
 
         //prepare();
     }
-    
-    
 
     @Override
     public void removeObject(Actor object) {
@@ -64,7 +69,6 @@ public class Mundo1 extends World {
             placar.atualizaPlacar();
         }
         super.removeObject(object);
-        return;
     }
 
     public void DroparInimigo() {
@@ -74,7 +78,7 @@ public class Mundo1 extends World {
         if (DropInimigo == 1) {
             Enemy inimigo1 = new Enemy();
             addObject(inimigo1, 699, 340);
-           
+
         }
          if (DropInimigoCeu == 1 && timer<250) {
             EnemyAir Air = new EnemyAir();
@@ -84,7 +88,7 @@ public class Mundo1 extends World {
             Boss1 boss = new Boss1();
             addObject(boss, 699, 50);
         }
-       
+
     }
 
     public void prepare() {
@@ -94,21 +98,21 @@ public class Mundo1 extends World {
     }
 
     public void aplicarForcaDaGravidade() {
-       
+
         if (heroi.morte ==false){
         if (heroi.alturaAtual() > 0 ) {
             heroi.setLocation(heroi.getX(), heroi.getY() + FORCA_DE_GRAVIDADE);
-           
+
 
         }
     }
     if (heroi2.morte ==false){
         if (heroi2.alturaAtual() > 0) {
             heroi2.setLocation(heroi2.getX(), heroi2.getY() + FORCA_DE_GRAVIDADE);
-           
+
 
         }
-        
+
     }
     }
 
@@ -129,16 +133,16 @@ public class Mundo1 extends World {
         return timer;
     }
 
-    
+
 
     public void act() {
-        
-    
+
+
 
         projetor(proximaCena());
-        
+
         aplicarForcaDaGravidade();
-        
+
 
 
 

@@ -1,28 +1,39 @@
 import greenfoot.*;
 
-public class Vida extends Actor {
-    private int vidaDoPersonagem;
+public class Vida extends Actor{
+    public String NOME_ARQUIVO_IMAGEM = "life/life-";
+    public String EXTENSAO_ARQUIVO_IMAGEM = ".png";
 
-    public Vida(int vidaDoPersonagem) {
-        this.vidaDoPersonagem = vidaDoPersonagem;
-        atualizarTextoVida();
-    }
+    private int identificadorPlayer;
+    private Player player;
+    private World mundo;
 
-    public void atualizarTextoVida() {
-        GreenfootImage imagem = new GreenfootImage("Vida: " + vidaDoPersonagem, 20, Color.BLACK, null);
-        setImage(imagem);
-    }
-
-    public void setVidaDoPersonagem(int novaVida) {
-        vidaDoPersonagem = novaVida;
-        atualizarTextoVida();
-    }
-
-    public int getVidaDoPersonagem() {
-        return vidaDoPersonagem;
+    public Vida(Player player) {
+        this.player = player;
+        this.mundo = player.getWorld();
+        this.identificadorPlayer = player.getIdentificadorPlayer();
+        setImage(NOME_ARQUIVO_IMAGEM + player.getIdentificadorPlayer() + EXTENSAO_ARQUIVO_IMAGEM);
     }
 
     public void act() {
-        // Código de atualização da classe Vida, se necessário
+
+    }
+
+    public Player getPlayer() {
+        return this.player;
+    }
+
+    public void exibirVida() {
+        /*if (player.getVidas() == 3) {
+
+        }
+        Vida vida = new Vida(mundo.getHeroi());
+        mundo.addObject(vida, 50, 50);*/
+    }
+
+    private GreenfootImage criaImagem() {
+        GreenfootImage imagemVida = new GreenfootImage(
+            NOME_ARQUIVO_IMAGEM + player.getIdentificadorPlayer() + EXTENSAO_ARQUIVO_IMAGEM);
+        return imagemVida;
     }
 }
