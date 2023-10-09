@@ -26,6 +26,7 @@ public class Player extends Personagem {
     public int alturaAtualDoPulo = 0;
 
     private int identificadorPlayer;
+    private boolean atirando = false;
 
     public Player() {
 
@@ -64,22 +65,47 @@ public class Player extends Personagem {
 
     }
 
-    private void disparo() {
+    public void disparo() {
+        if (deveAtirar() && !isAtirando()) {
+            DisparoPlayer tiro = criarTiro();
+            atirar(tiro);
+            ajustarDirecaoDoTiro(tiro);
+        } else if (!deveAtirar()) {
+            pararAtirar();
+        }
+    }
+
+    private boolean deveAtirar() {
+        return Greenfoot.isKeyDown(Atirar);
+    }
+
+    private boolean isAtirando() {
+        return this.atirando;
+    }
+
+    private DisparoPlayer criarTiro() {
         DisparoPlayer tiro = new DisparoPlayer();
-        if (Greenfoot.isKeyDown(Atirar)) {
-            tiro.playSomDisparo();
-            if (tiro.latencia == 1) {
-                getWorld().addObject(tiro, getX() + 5, getY());
-                if (Greenfoot.isKeyDown(Cima) && Greenfoot.isKeyDown(Direita)) {
-                    tiro.setRotation(-45);
+        tiro.playSomDisparo();
+        this.atirando = true;
+        return tiro;
+    }
 
-                }
-                if (Greenfoot.isKeyDown(Cima) && !Greenfoot.isKeyDown(Direita)) {
-                    tiro.setRotation(-90);
+    private void atirar(DisparoPlayer tiro) {
+        getWorld().addObject(tiro, getX() + 5, getY());
+    }
 
-                }
+    private void ajustarDirecaoDoTiro(DisparoPlayer tiro) {
+        if (Greenfoot.isKeyDown(Cima)) {
+            if (Greenfoot.isKeyDown(Direita)) {
+                tiro.setRotation(-45);
+            } else {
+                tiro.setRotation(-90);
             }
         }
+    }
+
+    private void pararAtirar() {
+        this.atirando = false;
     }
 
     private void gerenciamentoDoPulo() {
