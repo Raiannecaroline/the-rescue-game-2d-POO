@@ -31,8 +31,13 @@ public class Enemy extends Personagem {
     public void act() {
         super.act();
 
+<<<<<<< HEAD
+        movimentacao();
+        disparoInimigo();
+=======
         //movimentacao();
         //disparoInimigo();
+>>>>>>> ac05a2ef5c3fdb22f9bee913be73b395e3a55696
         setListaDisparosSofridos();
         morte();
 
@@ -49,10 +54,19 @@ public class Enemy extends Personagem {
     }
 
     private void disparoInimigo() {
+<<<<<<< HEAD
+        int latencia = Greenfoot.getRandomNumber(60);
+
+        DisparoEnemy ataque = new DisparoEnemy();
+       
+        if (latencia == 1) {
+             ataque.playSomDisparo();
+=======
 
         DisparoEnemy ataque = new DisparoEnemy();
         ataque.playSomDisparo();
         if (ataque.latencia == 1) {
+>>>>>>> ac05a2ef5c3fdb22f9bee913be73b395e3a55696
             getWorld().addObject(ataque, getX(), getY());
         }
     }
