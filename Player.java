@@ -11,6 +11,7 @@ public class Player extends Personagem {
     public String EXTENSAO_ARQUIVO_IMAGEM = ".png";
 
     public int proximoPasso = 1;
+<<<<<<< HEAD
     public String Direita;
     public String Esquerda;
     public String Pular;
@@ -20,6 +21,14 @@ public class Player extends Personagem {
     public int timer = 0;
     private int cicloAtual = 0;
 
+=======
+    public String Direita = "null";
+    public String Esquerda = "null";
+    public String Pular = "null";
+    public String Atirar = "null";
+    public String Cima = "null";
+    private int vidas = 3;
+>>>>>>> ac05a2ef5c3fdb22f9bee913be73b395e3a55696
 
     public static int TAXA_DE_ATUALIZACAO = 2;
     public static final int ALTURA_MAXIMA_PULO = 6;
@@ -28,6 +37,7 @@ public class Player extends Personagem {
     public boolean estaEmPulo = false;
     public int alturaAtualDoPulo = 0;
 
+<<<<<<< HEAD
     protected int identificadorPlayer;
     private boolean atirando = false;
     public boolean morte1;
@@ -64,6 +74,15 @@ public class Player extends Personagem {
     }
 
 
+=======
+    private int identificadorPlayer;
+    private boolean atirando = false;
+
+    public Player() {
+
+    }
+
+>>>>>>> ac05a2ef5c3fdb22f9bee913be73b395e3a55696
     public Player(int identificadorPlayer, String Direita, String Esquerda, String Pular, String Atirar, String Cima) {
         super();
         this.identificadorPlayer = identificadorPlayer;
@@ -75,16 +94,22 @@ public class Player extends Personagem {
     }
 
     public void act() {
+<<<<<<< HEAD
         
 
         morte();
         movimentacao();
         disparo();
     
+=======
+        movimentacao();
+        disparo();
+>>>>>>> ac05a2ef5c3fdb22f9bee913be73b395e3a55696
 
     }
 
     private void morte() {
+<<<<<<< HEAD
 
          
                        
@@ -114,6 +139,22 @@ public class Player extends Personagem {
         }  
    
     
+=======
+        java.util.List<DisparoEnemy> ataques = getIntersectingObjects(DisparoEnemy.class);
+
+        for (DisparoEnemy ataque : ataques) {
+            // Verifica se o objeto é uma instância da classe Player
+            if (ataque.getClass() == DisparoEnemy.class) {
+                vidas--;
+
+                if (vidas == 0) {
+                    getWorld().removeObject(this);
+
+                }
+            }
+        }
+
+>>>>>>> ac05a2ef5c3fdb22f9bee913be73b395e3a55696
     }
 
     public void disparo() {
@@ -182,6 +223,7 @@ public class Player extends Personagem {
     }
 
     private void movimentacao() {
+<<<<<<< HEAD
         if (!morte1) {
 
             gerenciamentoDaCaminhada();
@@ -196,6 +238,19 @@ public class Player extends Personagem {
             }
         }
 
+=======
+
+        gerenciamentoDaCaminhada();
+        gerenciamentoDoPulo();
+        if (Greenfoot.isKeyDown(Direita)) {
+            move(2);
+            setRotation(0);
+        }
+        if (Greenfoot.isKeyDown(Esquerda)) {
+            move(-2);
+            setRotation(0);
+        }
+>>>>>>> ac05a2ef5c3fdb22f9bee913be73b395e3a55696
     }
 
     private void gerenciamentoDaCaminhada() {
@@ -219,7 +274,11 @@ public class Player extends Personagem {
             setLocation(getX(), getY() - Mundo1.FORCA_DE_GRAVIDADE * 2);
 
         }
+<<<<<<< HEAD
          return;
+=======
+
+>>>>>>> ac05a2ef5c3fdb22f9bee913be73b395e3a55696
     }
 
     private void executaApiceDoPulo() {
@@ -227,7 +286,11 @@ public class Player extends Personagem {
             estaEmPulo = false;
 
         }
+<<<<<<< HEAD
 return;
+=======
+
+>>>>>>> ac05a2ef5c3fdb22f9bee913be73b395e3a55696
     }
 
     private void executaDescidaDoPulo() {
@@ -235,7 +298,11 @@ return;
             alturaAtualDoPulo--;
 
         }
+<<<<<<< HEAD
 return;
+=======
+
+>>>>>>> ac05a2ef5c3fdb22f9bee913be73b395e3a55696
     }
 
     private void executaPousoDoPulo() {
@@ -243,12 +310,19 @@ return;
             estaEmTerraFirme = true;
 
         }
+<<<<<<< HEAD
 return;
+=======
+
+>>>>>>> ac05a2ef5c3fdb22f9bee913be73b395e3a55696
     }
 
     public int alturaDosPes() {
         return getY() + getImage().getHeight() / 2;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ac05a2ef5c3fdb22f9bee913be73b395e3a55696
     }
 
     public int alturaAtual() {
@@ -256,6 +330,7 @@ return;
     }
 
     private boolean possoAtualizar() {
+<<<<<<< HEAD
 
         
         return (cicloAtual() % TAXA_DE_ATUALIZACAO) == 0;
@@ -275,11 +350,17 @@ return;
         }
     }
     
+=======
+        Mundo1 mundo = (Mundo1) getWorld();
+        return (mundo.cicloAtual() % TAXA_DE_ATUALIZACAO) == 0;
+    }
+>>>>>>> ac05a2ef5c3fdb22f9bee913be73b395e3a55696
 
     private boolean timer() {
         Mundo1 mundo = (Mundo1) getWorld();
         return (mundo.cicloAtual() % 106) == 0;
     }
+<<<<<<< HEAD
     public boolean existemObjetosDaClasse(Class classeDesejada) {
     World mundo = getWorld(); // Obtém o mundo atual
 
@@ -292,5 +373,7 @@ return;
 
     return false; // Não encontrou objetos da classe
 }
+=======
+>>>>>>> ac05a2ef5c3fdb22f9bee913be73b395e3a55696
 
 }
