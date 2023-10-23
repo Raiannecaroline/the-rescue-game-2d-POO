@@ -48,11 +48,8 @@ public class Boss1 extends Personagem {
 
     private void disparoInimigo() {
         int latencia = Greenfoot.getRandomNumber(300);
-         int direcaoTiro = Greenfoot.getRandomNumber(150);
-         if(direcaoTiro<=30){
-             direcaoTiro =30;
-             
-         }
+         int direcaoTiro = Greenfoot.getRandomNumber(150)*-1;
+         
 
         AtaqueBoss1 atacar = new AtaqueBoss1();
        

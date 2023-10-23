@@ -27,7 +27,7 @@ public class Mundo1 extends World {
 
 
     public int timer = 0;
-     public int timerBoss = 250;
+     public int timerBoss = 10;
 
 
     public Mundo1() {
@@ -54,6 +54,8 @@ public class Mundo1 extends World {
         addObject(heroi, 60, 336);
         addObject(heroi2, 80, 336);
         addObject(placar, 50, 10);
+        
+        setActOrder(Player.class);
 
 
 
@@ -137,6 +139,7 @@ public class Mundo1 extends World {
 
 
     public void act() {
+        
 
 
 
