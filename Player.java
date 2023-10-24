@@ -11,6 +11,7 @@ public class Player extends Personagem {
     public String EXTENSAO_ARQUIVO_IMAGEM = ".png";
 
     public int proximoPasso = 1;
+
     public String Direita;
     public String Esquerda;
     public String Pular;
@@ -21,6 +22,14 @@ public class Player extends Personagem {
     private int cicloAtual = 0;
 
 
+    public String Direita = "null";
+    public String Esquerda = "null";
+    public String Pular = "null";
+    public String Atirar = "null";
+    public String Cima = "null";
+    private int vidas = 3;
+
+
     public static int TAXA_DE_ATUALIZACAO = 2;
     public static final int ALTURA_MAXIMA_PULO = 6;
 
@@ -28,6 +37,7 @@ public class Player extends Personagem {
     public boolean estaEmPulo = false;
     public int alturaAtualDoPulo = 0;
 
+<<<<<<< HEAD
     protected int identificadorPlayer;
     private boolean atirando = false;
     public boolean morte1;
@@ -64,6 +74,15 @@ public class Player extends Personagem {
     }
 
 
+
+    private int identificadorPlayer;
+    private boolean atirando = false;
+
+    public Player() {
+
+    }
+
+
     public Player(int identificadorPlayer, String Direita, String Esquerda, String Pular, String Atirar, String Cima) {
         super();
         this.identificadorPlayer = identificadorPlayer;
@@ -75,6 +94,7 @@ public class Player extends Personagem {
     }
 
     public void act() {
+
         
 
         morte();
@@ -82,9 +102,14 @@ public class Player extends Personagem {
         disparo();
     
 
+        movimentacao();
+        disparo();
+
+
     }
 
     private void morte() {
+
 
          
                        
@@ -114,7 +139,22 @@ public class Player extends Personagem {
         }  
    
     
-    }
+
+        java.util.List<DisparoEnemy> ataques = getIntersectingObjects(DisparoEnemy.class);
+
+        for (DisparoEnemy ataque : ataques) {
+            // Verifica se o objeto é uma instância da classe Player
+            if (ataque.getClass() == DisparoEnemy.class) {
+                vidas--;
+
+                if (vidas == 0) {
+                    getWorld().removeObject(this);
+
+                }
+            }
+        }
+
+  }
 
     public void disparo() {
         if (deveAtirar() && !isAtirando()) {
@@ -196,6 +236,18 @@ public class Player extends Personagem {
             }
         }
 
+
+        gerenciamentoDaCaminhada();
+        gerenciamentoDoPulo();
+        if (Greenfoot.isKeyDown(Direita)) {
+            move(2);
+            setRotation(0);
+        }
+        if (Greenfoot.isKeyDown(Esquerda)) {
+            move(-2);
+            setRotation(0);
+        }
+
     }
 
     private void gerenciamentoDaCaminhada() {
@@ -219,8 +271,9 @@ public class Player extends Personagem {
             setLocation(getX(), getY() - Mundo1.FORCA_DE_GRAVIDADE * 2);
 
         }
+
          return;
-    }
+   }
 
     private void executaApiceDoPulo() {
         if (alturaAtualDoPulo == ALTURA_MAXIMA_PULO) {
@@ -228,14 +281,18 @@ public class Player extends Personagem {
 
         }
 return;
-    }
+   }
 
     private void executaDescidaDoPulo() {
         if (alturaAtualDoPulo > 0 && !estaEmPulo) {
             alturaAtualDoPulo--;
 
         }
+
 return;
+
+
+
     }
 
     private void executaPousoDoPulo() {
@@ -243,11 +300,16 @@ return;
             estaEmTerraFirme = true;
 
         }
+
 return;
+
+
     }
 
     public int alturaDosPes() {
         return getY() + getImage().getHeight() / 2;
+
+
 
     }
 
@@ -256,6 +318,7 @@ return;
     }
 
     private boolean possoAtualizar() {
+
 
         
         return (cicloAtual() % TAXA_DE_ATUALIZACAO) == 0;
@@ -276,11 +339,15 @@ return;
     }
     
 
+        Mundo1 mundo = (Mundo1) getWorld();
+        return (mundo.cicloAtual() % TAXA_DE_ATUALIZACAO) == 0;
+    }
+
     private boolean timer() {
         Mundo1 mundo = (Mundo1) getWorld();
         return (mundo.cicloAtual() % 106) == 0;
     }
-    public boolean existemObjetosDaClasse(Class classeDesejada) {
+   public boolean existemObjetosDaClasse(Class classeDesejada) {
     World mundo = getWorld(); // Obtém o mundo atual
 
     // Percorre todos os objetos no mundo
@@ -292,5 +359,5 @@ return;
 
     return false; // Não encontrou objetos da classe
 }
-
 }
+
