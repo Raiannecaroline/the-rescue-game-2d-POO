@@ -9,6 +9,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class AtaqueBoss1 extends Disparo
 {
      public void act() {
-        atirando(Boss1.class);
+        atirando(Player.class);
     }
 }
