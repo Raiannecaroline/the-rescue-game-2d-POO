@@ -133,6 +133,13 @@ public class Mundo2 extends World {
     public int Timer() {
         return timer;
     }
+    
+    private void GamerOver(){
+         java.util.List<Player> myActors = getObjects(Player.class);
+
+         if (myActors.isEmpty()) {
+            Greenfoot.setWorld(new GameOver());   }
+    }
 
 
 
@@ -144,6 +151,7 @@ public class Mundo2 extends World {
 
         aplicarForcaDaGravidade();
         contaCiclo();
+        GamerOver();
 
 
 

@@ -95,13 +95,13 @@ public class Player extends Personagem {
                 vidas--;
 
                 if (vidas == 0) {
-                    if(getWorld()== null ) {
-                          Greenfoot.setWorld(new GameOver());
-                        }  
+                     
                         
                     morte1 = true;
-                    
+                                       
                      getWorld().removeObject(this);
+                      
+
                      
                    
 
@@ -252,8 +252,17 @@ return;
     }
 
     public int alturaAtual() {
-        return ((alturaDosPes() - 20) - Mundo1.NIVEL_DO_SOLO) * -1;
+        
+        if (getWorld() instanceof Mundo1) {
+            return ((alturaDosPes() - 20) - Mundo1.NIVEL_DO_SOLO) * -1;
+        } else if (getWorld() instanceof Mundo2) {
+            return ((alturaDosPes() - 20) - Mundo2.NIVEL_DO_SOLO) * -1;
+        } else {
+            // Lógica de retorno padrão caso o objeto não esteja em Mundo1 ou Mundo2
+            return 0;
+        }
     }
+    
 
     private boolean possoAtualizar() {
 

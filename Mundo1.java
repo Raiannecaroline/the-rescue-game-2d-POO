@@ -56,6 +56,8 @@ public class Mundo1 extends World {
         addObject(placar, 50, 10);
         
         setActOrder(Player.class);
+        
+        
 
 
 
@@ -117,6 +119,13 @@ public class Mundo1 extends World {
 
     }
     }
+    
+    private void GamerOver(){
+         java.util.List<Player> myActors = getObjects(Player.class);
+
+      if (myActors.isEmpty()) {
+            Greenfoot.setWorld(new GameOver());  }
+    }
 
 
     public int cicloAtual() {
@@ -146,6 +155,7 @@ public class Mundo1 extends World {
         projetor(proximaCena());
 
         aplicarForcaDaGravidade();
+        GamerOver();
 
 
 
