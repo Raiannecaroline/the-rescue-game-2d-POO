@@ -7,35 +7,35 @@ import java.util.List;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Mundo2 extends World {
+public class Mundo3 extends World {
     public static final int LARGURA_CENARIO = 700;
     public static final int ALTURA_CENARIO = 390;
     public static final int QUANTIDADE_DE_QUADROS = 100;
     public static final int NIVEL_DO_SOLO = 349;
     public static final int FORCA_DE_GRAVIDADE = 7;
     public static final int TAMANHO_DO_QUADRO = 5;
-    public static final String NOME_ARQUIVO_IMAGEM = "cenarios/CenariomovimentIlha-2/cenario_";
+    public static final String NOME_ARQUIVO_IMAGEM = "cenarios/CenariomovimentIlha-3/cenario_";
     public static final String EXTENSAO_ARQUIVO_IMAGEM = ".png";
     public static final int TAMANHO_DO_PLACAR = 30;
     public static final int letraVida = 30;
 
     private int quadroAtual = 1;
     private int cicloAtual = 0;
-    private Player heroi;
-    private Player heroi2;
+    private PlayerAir heroi;
+    private PlayerAir heroi2;
     private Placar placar;
 
     public int timer = 0;
     public int timerBoss = 250;
 
-    public Mundo2() {
+    public Mundo3() {
 
         super(LARGURA_CENARIO, ALTURA_CENARIO, 1);
 
-        GreenfootImage cenarioInicial = new GreenfootImage("mundo2.png");
+        GreenfootImage cenarioInicial = new GreenfootImage("mundo3.png");
         setBackground(cenarioInicial);
-        heroi = new Player(1, "right", "left", "0", "enter", "up");
-        heroi2 = new Player(2, "d", "a", "space", "t", "w");
+        heroi = new PlayerAir(1, "right", "left", "down", "enter", "up");
+        heroi2 = new PlayerAir(2, "d", "a", "s", "t", "w");
         placar = new Placar(0, TAMANHO_DO_PLACAR);
 
         Placar placarVidaHeroi = new PlacarVida(heroi, TAMANHO_DO_PLACAR);
@@ -126,7 +126,7 @@ public class Mundo2 extends World {
     }
 
     private void GamerOver() {
-        java.util.List<Player> myActors = getObjects(Player.class);
+        java.util.List<PlayerAir> myActors = getObjects(PlayerAir.class);
 
         if (myActors.isEmpty()) {
             Greenfoot.setWorld(new GameOver());
@@ -137,7 +137,7 @@ public class Mundo2 extends World {
 
         projetor(proximaCena());
 
-        aplicarForcaDaGravidade();
+        //aplicarForcaDaGravidade();
         GamerOver();
 
         contaCiclo();

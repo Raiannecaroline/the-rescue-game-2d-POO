@@ -17,7 +17,7 @@ public class Mundo1 extends World {
     public static final String NOME_ARQUIVO_IMAGEM = "cenarios/CenariomovimentIlha/cenario_";
     public static final String EXTENSAO_ARQUIVO_IMAGEM = ".png";
     public static final int TAMANHO_DO_PLACAR = 30;
-     public static final int letraVida= 30;
+    public static final int letraVida = 30;
 
     private int quadroAtual = 1;
     private int cicloAtual = 0;
@@ -25,13 +25,10 @@ public class Mundo1 extends World {
     private Player heroi2;
     private Placar placar;
 
-
     public int timer = 0;
-     public int timerBoss = 10;
-
+    public int timerBoss = 10;
 
     public Mundo1() {
-
 
         super(LARGURA_CENARIO, ALTURA_CENARIO, 1);
 
@@ -51,19 +48,11 @@ public class Mundo1 extends World {
         addObject(placarVidaHeroi, 25, 25);
         addObject(placarVidaHeroi2, 675, 25);
 
-        addObject(heroi, 60, 336);
-        addObject(heroi2, 80, 336);
+        addObject(heroi, 60, NIVEL_DO_SOLO);
+        addObject(heroi2, 80, NIVEL_DO_SOLO);
         addObject(placar, 50, 10);
-        
+
         setActOrder(Player.class);
-        
-        
-
-
-
-
-
-
 
         prepare();
     }
@@ -79,17 +68,17 @@ public class Mundo1 extends World {
     public void DroparInimigo() {
 
         int DropInimigo = Greenfoot.getRandomNumber(50);
-         int DropInimigoCeu = Greenfoot.getRandomNumber(200);
+        int DropInimigoCeu = Greenfoot.getRandomNumber(200);
         if (DropInimigo == 1) {
             Enemy inimigo1 = new Enemy();
             addObject(inimigo1, 699, 340);
 
         }
-         if (DropInimigoCeu == 1 && timer<timerBoss) {
-            EnemyAir Air = new EnemyAir();
-            addObject(Air, 699, 150);
+        if (DropInimigoCeu == 1 && timer < timerBoss) {
+            EnemyAir air = new EnemyAir();
+            addObject(air, 699, 150);
         }
-         if (timer == timerBoss ) {
+        if (timer == timerBoss) {
             Boss1 boss = new Boss1();
             addObject(boss, 699, 50);
         }
@@ -103,30 +92,28 @@ public class Mundo1 extends World {
 
     public void aplicarForcaDaGravidade() {
 
-        if (heroi.morte1 ==false){
-        if (heroi.alturaAtual() > 0 ) {
-            heroi.setLocation(heroi.getX(), heroi.getY() + FORCA_DE_GRAVIDADE);
+        if (heroi.morte1 == false) {
+            if (heroi.alturaAtual() > 0) {
+                heroi.setLocation(heroi.getX(), heroi.getY() + FORCA_DE_GRAVIDADE);
 
+            }
+        }
+        if (heroi2.morte1 == false) {
+            if (heroi2.alturaAtual() > 0) {
+                heroi2.setLocation(heroi2.getX(), heroi2.getY() + FORCA_DE_GRAVIDADE);
+
+            }
 
         }
     }
-    if (heroi2.morte1 ==false){
-        if (heroi2.alturaAtual() > 0) {
-            heroi2.setLocation(heroi2.getX(), heroi2.getY() + FORCA_DE_GRAVIDADE);
 
+    private void GamerOver() {
+        java.util.List<Player> myActors = getObjects(Player.class);
 
+        if (myActors.isEmpty()) {
+            Greenfoot.setWorld(new GameOver());
         }
-
     }
-    }
-    
-    private void GamerOver(){
-         java.util.List<Player> myActors = getObjects(Player.class);
-
-      if (myActors.isEmpty()) {
-            Greenfoot.setWorld(new GameOver());  }
-    }
-
 
     public int cicloAtual() {
         return cicloAtual;
@@ -134,31 +121,24 @@ public class Mundo1 extends World {
 
     private void contaCiclo() {
         cicloAtual++;
-        if((cicloAtual() % 16) == 0){
+        if ((cicloAtual() % 16) == 0) {
             timer++;
         }
         if (cicloAtual > 2000) {
             cicloAtual = 0;
         }
     }
+
     public int Timer() {
         return timer;
     }
 
-
-
     public void act() {
-        
-
-
 
         projetor(proximaCena());
 
         aplicarForcaDaGravidade();
         GamerOver();
-
-
-
 
         contaCiclo();
         DroparInimigo();

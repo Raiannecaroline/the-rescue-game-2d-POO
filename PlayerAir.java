@@ -6,47 +6,25 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Player extends Personagem {
-    public String NOME_ARQUIVO_IMAGEM = "player/player-";
+public class PlayerAir extends Personagem {
+    public String NOME_ARQUIVO_IMAGEM = "helicopter-players/helicopter-players-";
     public String EXTENSAO_ARQUIVO_IMAGEM = ".png";
 
     public int proximoPasso = 1;
     public String Direita;
     public String Esquerda;
-    public String Pular;
     public String Atirar;
     public String Cima;
+    public String Baixo;
     public int vidas = 5;
     public int timer = 0;
     private int cicloAtual = 0;
 
     public static int TAXA_DE_ATUALIZACAO = 2;
-    public static final int ALTURA_MAXIMA_PULO = 6;
-
-    public boolean estaEmTerraFirme = true;
-    public boolean estaEmPulo = false;
-    public int alturaAtualDoPulo = 0;
 
     protected int identificadorPlayer;
     private boolean atirando = false;
     public boolean morte1;
-
-    private Vida BarraDevida1;
-    private Vida BarraDevida2;
-
-    public Player(int vidas) {
-        this.vidas = vidas;
-        morte1 = false;
-
-        // Valor inicial da vida do personagem
-
-    }
-
-    public Player(int vidas, int identificadorPlayer) {
-        this.vidas = vidas;
-        this.identificadorPlayer = identificadorPlayer;
-
-    }
 
     public int getVidas() {
         return vidas;
@@ -56,12 +34,11 @@ public class Player extends Personagem {
         return identificadorPlayer;
     }
 
-    public Player(int identificadorPlayer, String Direita, String Esquerda, String Pular, String Atirar, String Cima) {
-        super();
+    public PlayerAir(int identificadorPlayer, String Direita, String Esquerda, String Baixo, String Atirar, String Cima) {
         this.identificadorPlayer = identificadorPlayer;
         this.Direita = Direita;
         this.Esquerda = Esquerda;
-        this.Pular = Pular;
+        this.Baixo = Baixo;
         this.Atirar = Atirar;
         this.Cima = Cima;
     }
@@ -135,39 +112,25 @@ public class Player extends Personagem {
         this.atirando = false;
     }
 
-    private void gerenciamentoDoPulo() {
-
-        capturaInicoDoPulo();
-        executaSubidaDoPulo();
-        executaDescidaDoPulo();
-        executaApiceDoPulo();
-        executaPousoDoPulo();
-
-    }
-
-    private void capturaInicoDoPulo() {
-
-        if (alturaAtual() != 0 || timer()) {
-            if (Greenfoot.isKeyDown(Pular)) {
-
-                estaEmTerraFirme = false;
-                estaEmPulo = true;
-
-            }
-        }
-    }
-
     private void movimentacao() {
         if (!morte1) {
 
             gerenciamentoDaCaminhada();
-            gerenciamentoDoPulo();
+
             if (Greenfoot.isKeyDown(Direita)) {
                 move(3);
                 setRotation(0);
             }
             if (Greenfoot.isKeyDown(Esquerda)) {
                 move(-3);
+                setRotation(0);
+            }
+            if (Greenfoot.isKeyDown(Cima)) {
+                setLocation(getX(), getY() - 3);
+                setRotation(0);
+            }
+            if (Greenfoot.isKeyDown(Baixo)) {
+                setLocation(getX(), getY() + 3);
                 setRotation(0);
             }
         }
@@ -182,44 +145,11 @@ public class Player extends Personagem {
         if (possoAtualizar()) {
             proximoPasso++;
         }
-        if (proximoPasso > 6) {
+        if (proximoPasso > 5) {
 
-            proximoPasso = 1;
+            proximoPasso = 0;
         }
 
-    }
-
-    private void executaSubidaDoPulo() {
-        if (alturaAtualDoPulo < ALTURA_MAXIMA_PULO && estaEmPulo) {
-            alturaAtualDoPulo++;
-            setLocation(getX(), getY() - Mundo1.FORCA_DE_GRAVIDADE * 2);
-
-        }
-        return;
-    }
-
-    private void executaApiceDoPulo() {
-        if (alturaAtualDoPulo == ALTURA_MAXIMA_PULO) {
-            estaEmPulo = false;
-
-        }
-        return;
-    }
-
-    private void executaDescidaDoPulo() {
-        if (alturaAtualDoPulo > 0 && !estaEmPulo) {
-            alturaAtualDoPulo--;
-
-        }
-        return;
-    }
-
-    private void executaPousoDoPulo() {
-        if (alturaAtualDoPulo == 0 && !estaEmPulo) {
-            estaEmTerraFirme = true;
-
-        }
-        return;
     }
 
     public int alturaDosPes() {
