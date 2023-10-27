@@ -66,17 +66,20 @@ public class Mundo3 extends World {
     }
 
     public void DroparInimigo() {
+        int posicaoInimigo = Greenfoot.getRandomNumber(370) + 10;
+        int posicaoBolaFogo = Greenfoot.getRandomNumber(640) + 30;
 
         int DropInimigo = Greenfoot.getRandomNumber(50);
-        int DropInimigoCeu = Greenfoot.getRandomNumber(200);
+        int DropInimigoCeu = Greenfoot.getRandomNumber(100);
+
         if (DropInimigo == 1) {
-            Enemy2 inimigo1 = new Enemy2();
-            addObject(inimigo1, 699, NIVEL_DO_SOLO + 5);
+            EnemyAir2 air = new EnemyAir2();
+            addObject(air, 699, posicaoInimigo);
 
         }
-        if (DropInimigoCeu == 1 && timer < timerBoss) {
-            EnemyAir2 air = new EnemyAir2();
-            addObject(air, 699, 150);
+        if (DropInimigo == 1) {
+            BolaFogo bolaFogo = new BolaFogo();
+            addObject(bolaFogo, posicaoBolaFogo, 50);
         }
         if (timer == timerBoss) {
             Boss2 boss = new Boss2();
@@ -92,19 +95,6 @@ public class Mundo3 extends World {
 
     public void aplicarForcaDaGravidade() {
 
-        if (heroi.morte1 == false) {
-            if (heroi.alturaAtual() > 0) {
-                heroi.setLocation(heroi.getX(), heroi.getY() + FORCA_DE_GRAVIDADE);
-
-            }
-        }
-        if (heroi2.morte1 == false) {
-            if (heroi2.alturaAtual() > 0) {
-                heroi2.setLocation(heroi2.getX(), heroi2.getY() + FORCA_DE_GRAVIDADE);
-
-            }
-
-        }
     }
 
     public int cicloAtual() {

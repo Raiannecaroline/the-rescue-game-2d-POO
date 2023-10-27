@@ -7,7 +7,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public class PlayerAir extends Personagem {
-    public String NOME_ARQUIVO_IMAGEM = "helicopter-players/helicopter-players-";
+    public String NOME_ARQUIVO_IMAGEM = "helicopter-players/helicopter-player-";
     public String EXTENSAO_ARQUIVO_IMAGEM = ".png";
 
     public int proximoPasso = 1;
@@ -34,13 +34,16 @@ public class PlayerAir extends Personagem {
         return identificadorPlayer;
     }
 
-    public PlayerAir(int identificadorPlayer, String Direita, String Esquerda, String Baixo, String Atirar, String Cima) {
+    public PlayerAir(int identificadorPlayer, String Direita, String Esquerda, String Baixo, String Atirar,
+            String Cima) {
         this.identificadorPlayer = identificadorPlayer;
         this.Direita = Direita;
         this.Esquerda = Esquerda;
         this.Baixo = Baixo;
         this.Atirar = Atirar;
         this.Cima = Cima;
+
+        setImage(NOME_ARQUIVO_IMAGEM + identificadorPlayer + "-" + proximoPasso + EXTENSAO_ARQUIVO_IMAGEM);
     }
 
     public void act() {
@@ -55,6 +58,20 @@ public class PlayerAir extends Personagem {
 
         if (isTouching(DisparoEnemy.class)) {
             removeTouching(DisparoEnemy.class);
+            vidas--;
+
+            if (vidas == 0) {
+
+                morte1 = true;
+
+                getWorld().removeObject(this);
+
+            }
+
+        }
+
+        if (isTouching(BolaFogo.class)) {
+            removeTouching(BolaFogo.class);
             vidas--;
 
             if (vidas == 0) {

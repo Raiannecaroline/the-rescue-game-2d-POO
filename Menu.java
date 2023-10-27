@@ -35,7 +35,7 @@ public class Menu extends World
 
         if("enter".equals(key)){
             switch(tela){
-                case 1:Greenfoot.setWorld(new MundoIntro());break;
+                case 1:Greenfoot.setWorld(new Mundo1());break;
                 case 2:Greenfoot.setWorld(new Creditos());    break;
                 case 3:Greenfoot.stop();                      break;
             }

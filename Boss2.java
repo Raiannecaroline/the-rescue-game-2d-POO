@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Boss2 extends Personagem {
 
-    public int vida = 100;
+    public int vida = 1;
 
     private int raioDeteccao = 700;
     private int raioAtaque = 200;
@@ -34,16 +34,16 @@ public class Boss2 extends Personagem {
     }
 
     private void morte() {
-        
+
         if (isTouching(DisparoPlayer.class)) {
             removeTouching(DisparoPlayer.class);
             vida--;
             if (vida == 0) {
                 getWorld().removeObject(this);
-                Greenfoot.setWorld(new Menu());
+                Greenfoot.setWorld(new CutScene2To3());
             }
         }
-        
+
     }
 
     private void disparoInimigo() {
@@ -51,11 +51,11 @@ public class Boss2 extends Personagem {
          int direcaoTiro = Greenfoot.getRandomNumber(150);
          if(direcaoTiro<=30){
              direcaoTiro =30;
-             
+
          }
 
         AtaqueBoss1 atacar = new AtaqueBoss1();
-       
+
         if (latencia == 5) {
              atacar.playSomDisparo();
             getWorld().addObject(atacar, getX(), getY());
@@ -69,17 +69,17 @@ public class Boss2 extends Personagem {
        if(getX() >350){
            move(-3);
        }
-            
+
 
             // ataca();
-       
+
 
     }
 
-    
 
 
-   
 
-   
+
+
+
 }

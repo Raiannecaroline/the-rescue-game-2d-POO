@@ -38,6 +38,11 @@ public class Personagem extends Actor {
 
     }
 
+    public Personagem(String NOME_ARQUIVO_IMAGEM, String EXTENSAO_ARQUIVO_IMAGEM) {
+        this.NOME_ARQUIVO_IMAGEM = NOME_ARQUIVO_IMAGEM;
+        this.EXTENSAO_ARQUIVO_IMAGEM = EXTENSAO_ARQUIVO_IMAGEM;
+    }
+
     public void act() {
         contaCiclo();
 
