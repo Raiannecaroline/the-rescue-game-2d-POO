@@ -26,7 +26,7 @@ public class Mundo1 extends World {
     private Placar placar;
 
     public int timer = 0;
-    public int timerBoss = 10;
+    public int timerBoss = 1;
 
     public Mundo1() {
 

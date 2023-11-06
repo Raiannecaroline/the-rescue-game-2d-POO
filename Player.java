@@ -64,6 +64,7 @@ public class Player extends Personagem {
         this.Pular = Pular;
         this.Atirar = Atirar;
         this.Cima = Cima;
+        setImage(NOME_ARQUIVO_IMAGEM+identificadorPlayer+"-9"+EXTENSAO_ARQUIVO_IMAGEM);
     }
 
     public void act() {
@@ -122,12 +123,16 @@ public class Player extends Personagem {
     }
 
     private void ajustarDirecaoDoTiro(DisparoPlayer tiro) {
-        if (Greenfoot.isKeyDown(Cima)) {
-            if (Greenfoot.isKeyDown(Direita)) {
-                tiro.setRotation(-45);
-            } else {
-                tiro.setRotation(-90);
-            }
+        if (Greenfoot.isKeyDown(Cima) && Greenfoot.isKeyDown(Direita)) {
+            tiro.setRotation(-45);
+        } else if (Greenfoot.isKeyDown(Cima) && Greenfoot.isKeyDown(Esquerda)) {
+            tiro.setRotation(-135);
+        } else if (Greenfoot.isKeyDown(Cima)) {
+            tiro.setRotation(-90);
+        } else if (Greenfoot.isKeyDown(Direita)) {
+            tiro.setRotation(0);
+        } else if (Greenfoot.isKeyDown(Esquerda)) {
+            tiro.setRotation(180);
         }
     }
 
@@ -165,10 +170,12 @@ public class Player extends Personagem {
             if (Greenfoot.isKeyDown(Direita)) {
                 move(3);
                 setRotation(0);
+
             }
             if (Greenfoot.isKeyDown(Esquerda)) {
                 move(-3);
                 setRotation(0);
+                getImage().mirrorHorizontally();
             }
         }
 
@@ -235,6 +242,8 @@ public class Player extends Personagem {
             return ((alturaDosPes() - 20) - Mundo2.NIVEL_DO_SOLO) * -1;
         } else if (getWorld() instanceof Mundo3) {
             return ((alturaDosPes() - 20) - Mundo3.NIVEL_DO_SOLO) * -1;
+        } else if (getWorld() instanceof Mundo4) {
+            return ((alturaDosPes() - 20) - Mundo4.NIVEL_DO_SOLO) * -1;
         } else {
             // Lógica de retorno padrão caso o objeto não esteja em Mundo1 ou Mundo2
             return 0;
@@ -263,15 +272,21 @@ public class Player extends Personagem {
     private boolean timer() {
         World mundo = getWorld();
 
-        if (mundo instanceof Mundo3) {
-            Mundo3 mundo3 = (Mundo3) mundo;
-            return (mundo3.cicloAtual() % 106) == 0;
-
-        } else if (mundo instanceof Mundo1) {
+        if (mundo instanceof Mundo1) {
             Mundo1 mundo1 = (Mundo1) mundo;
+            return (mundo1.cicloAtual() % 106) == 0;
 
         } else if (mundo instanceof Mundo2) {
             Mundo2 mundo2 = (Mundo2) mundo;
+            return (mundo2.cicloAtual() % 106) == 0;
+
+        } else if (mundo instanceof Mundo3) {
+            Mundo3 mundo3 = (Mundo3) mundo;
+            return (mundo3.cicloAtual() % 106) == 0;
+
+        } else if (mundo instanceof Mundo4) {
+            Mundo4 Mundo4 = (Mundo4) mundo;
+            return (Mundo4.cicloAtual() % 106) == 0;
         }
 
         return false;

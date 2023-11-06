@@ -80,7 +80,7 @@ public class Mundo2 extends World {
         }
         if (timer == timerBoss) {
             Boss2 boss = new Boss2();
-            addObject(boss, 699, 332);
+            addObject(boss, 699, 50);
         }
 
     }
