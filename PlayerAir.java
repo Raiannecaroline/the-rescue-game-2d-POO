@@ -55,34 +55,26 @@ public class PlayerAir extends Personagem {
     }
 
     private void morte() {
+        
+        if(vidas == 0){
+            morte1 = true;
+
+                getWorld().removeObject(this);
+            
+        }else{
+            
+        
 
         if (isTouching(DisparoEnemy.class)) {
             removeTouching(DisparoEnemy.class);
             vidas--;
-
-            if (vidas == 0) {
-
-                morte1 = true;
-
-                getWorld().removeObject(this);
-
-            }
-
         }
 
         if (isTouching(BolaFogo.class)) {
             removeTouching(BolaFogo.class);
             vidas--;
-
-            if (vidas == 0) {
-
-                morte1 = true;
-
-                getWorld().removeObject(this);
-
-            }
-
         }
+    }
 
     }
 

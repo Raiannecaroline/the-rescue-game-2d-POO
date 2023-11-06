@@ -52,9 +52,9 @@ public class Mundo3 extends World {
         addObject(heroi2, 80, NIVEL_DO_SOLO);
         addObject(placar, 50, 10);
 
-        setActOrder(Player.class);
+        setActOrder(PlayerAir.class);
 
-        prepare();
+        //prepare();
     }
 
     @Override
