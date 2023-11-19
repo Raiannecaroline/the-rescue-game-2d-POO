@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Boss2 extends Personagem {
 
-    public int vida = 1;
+    public int vida = 10;
 
     private int raioDeteccao = 700;
     private int raioAtaque = 200;
