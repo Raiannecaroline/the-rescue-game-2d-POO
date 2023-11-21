@@ -1,60 +1,45 @@
-import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
-public class Personagem extends Actor {
-    public String NOME_ARQUIVO_IMAGEM;
-    public String EXTENSAO_ARQUIVO_IMAGEM;
-    public int TAXA_DE_ATUALIZACAO;
-    public int proximoPasso;
-    public int quantidadeAnimacoes;
-    public int ValorInicial;
-    private int identificadorPlayer;
-    public Mundo1 mundo;
+public abstract class Personagem extends Actor {
+    private String nomeImagem;
+    private String extensaoImagem;
+    private int taxaAtualizacao;
+    private int proximoPasso;
+    private int quantidadeAnimacoes;
+    private int valorInicial;
+    private int vida;
     private int cicloAtual;
+    private Class<? extends Disparo> disparoRival;
+    private boolean morto = false;
 
-    public Personagem() {
-        this.mundo = (Mundo1) getWorld();
-    }
 
-    public Personagem(String NOME_ARQUIVO_IMAGEM, String EXTENSAO_ARQUIVO_IMAGEM, int TAXA_DE_ATUALIZACAO,
-            int proximoPasso, int quantidadeAnimacoes, int ValorInicial, int identificadorPlayer) {
-        this.NOME_ARQUIVO_IMAGEM = NOME_ARQUIVO_IMAGEM;
-        this.EXTENSAO_ARQUIVO_IMAGEM = EXTENSAO_ARQUIVO_IMAGEM;
-        this.TAXA_DE_ATUALIZACAO = TAXA_DE_ATUALIZACAO;
+
+    public Personagem(
+            String nomeImagem, String extensaoImagem, int taxaAtualizacao, int proximoPasso, int quantidadeAnimacoes,
+            int valorInicial, int vida, Class<? extends Disparo> disparoRival) {
+
+        this.nomeImagem = nomeImagem;
+        this.extensaoImagem = extensaoImagem;
+        this.taxaAtualizacao = taxaAtualizacao;
         this.proximoPasso = proximoPasso;
-        this.ValorInicial = ValorInicial;
-        this.identificadorPlayer = identificadorPlayer;
         this.quantidadeAnimacoes = quantidadeAnimacoes;
+        this.valorInicial = valorInicial;
+        this.vida = vida;
+        this.disparoRival = disparoRival;
 
-    }
-
-    public Personagem(String NOME_ARQUIVO_IMAGEM, String EXTENSAO_ARQUIVO_IMAGEM, int TAXA_DE_ATUALIZACAO,
-            int proximoPasso, int quantidadeAnimacoes, int ValorInicial) {
-        this.NOME_ARQUIVO_IMAGEM = NOME_ARQUIVO_IMAGEM;
-        this.EXTENSAO_ARQUIVO_IMAGEM = EXTENSAO_ARQUIVO_IMAGEM;
-        this.TAXA_DE_ATUALIZACAO = TAXA_DE_ATUALIZACAO;
-        this.proximoPasso = proximoPasso;
-        this.ValorInicial = ValorInicial;
-        this.quantidadeAnimacoes = quantidadeAnimacoes;
-
-    }
-
-    public Personagem(String NOME_ARQUIVO_IMAGEM, String EXTENSAO_ARQUIVO_IMAGEM) {
-        this.NOME_ARQUIVO_IMAGEM = NOME_ARQUIVO_IMAGEM;
-        this.EXTENSAO_ARQUIVO_IMAGEM = EXTENSAO_ARQUIVO_IMAGEM;
+        setImage(nomeImagem + "-" + valorInicial + extensaoImagem);
     }
 
     public void act() {
-        contaCiclo();
-
+        setCicloAtual();
         Animacao();
-
-        // Add your action code here.
+        morte(disparoRival);
     }
 
     public void Animacao() {
 
         setImage(new GreenfootImage(
-                NOME_ARQUIVO_IMAGEM + "-" + proximoPasso + EXTENSAO_ARQUIVO_IMAGEM));
+                nomeImagem + "-" + proximoPasso + extensaoImagem));
 
         if (possoAtualizar()) {
             proximoPasso++;
@@ -63,24 +48,62 @@ public class Personagem extends Actor {
 
         if (proximoPasso > quantidadeAnimacoes) {
 
-            proximoPasso = ValorInicial;
+            proximoPasso = valorInicial;
         }
 
     }
 
-    public int cicloAtual() {
+    private boolean possoAtualizar() {
+        return (getCicloAtual() % taxaAtualizacao) == 0;
+    }
+
+    public int getVida() {
+        return vida;
+    }
+
+    public void danoSofrido() {
+        this.vida = vida--;
+    }
+
+    public int getCicloAtual() {
         return cicloAtual;
     }
 
-    private void contaCiclo() {
+    public void setCicloAtual() {
         cicloAtual++;
         if (cicloAtual > 2000) {
             cicloAtual = 0;
         }
     }
 
-    private boolean possoAtualizar() {
-        return (cicloAtual() % TAXA_DE_ATUALIZACAO) == 0;
+    public Class<? extends Disparo> getDisparoRival() {
+        return disparoRival;
     }
 
+    public void morte(Class<? extends Disparo> disparoRival) {
+        if (isTouching(disparoRival)) {
+            removeTouching(disparoRival);
+            vida--;
+            if (vida == 0) {
+                setMorto();
+                getWorld().removeObject(this);
+            }
+        }
+    }
+
+    public int getTaxaAtualizacao() {
+        return taxaAtualizacao;
+    }
+
+    public abstract void movimentacao();
+
+    public abstract void ataque();
+
+    public boolean isMorto() {
+        return morto;
+    }
+
+    public void setMorto() {
+        this.morto = true;
+    }
 }

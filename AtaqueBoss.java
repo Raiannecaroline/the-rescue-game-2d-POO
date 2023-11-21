@@ -6,9 +6,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name)
  * @version (a version number or a date)
  */
-public class AtaqueBoss1 extends DisparoEnemy
+public class AtaqueBoss extends DisparoEnemy
 {
      public void act() {
-        atirando(Player.class);
+        atirando(PlayerBase.class);
     }
 }

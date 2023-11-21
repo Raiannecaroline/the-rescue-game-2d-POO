@@ -9,7 +9,7 @@ public abstract class Disparo extends Actor {
     public void atirando(java.lang.Class<?> alvo) {
         int direcaoDisparo = 12;
 
-        if (alvo == Player.class) {
+        if (alvo == PlayerBase.class) {
             direcaoDisparo = -12;
         }
 
@@ -20,11 +20,6 @@ public abstract class Disparo extends Actor {
             getWorld().removeObject(this);
 
         }
-    }
-
-    public boolean Latencia() {
-        Mundo1 mundo = (Mundo1) getWorld();
-        return (mundo.cicloAtual() % latencia) == 0;
     }
 
     public void playSomDisparo(){
