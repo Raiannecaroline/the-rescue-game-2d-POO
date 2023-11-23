@@ -37,6 +37,10 @@ public class Boss1 extends Personagem {
         if (isTouching(DisparoPlayer.class)) {
             removeTouching(DisparoPlayer.class);
             vidaAtual--;
+            if(vidaAtual <=7){
+                Sound morte = new Sound("deadsoundBoss.wav");
+              morte.play();
+            }
             if (vidaAtual == 0) {
                 getWorld().removeObject(this);
                 Greenfoot.setWorld(new Mundo2());

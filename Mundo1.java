@@ -27,6 +27,7 @@ public class Mundo1 extends World {
 
     public int timer = 0;
     public int timerBoss = 10;
+     private boolean pausado = false;
 
     private Boss1 boss;
 
@@ -54,9 +55,9 @@ public class Mundo1 extends World {
         addObject(heroi2, 80, NIVEL_DO_SOLO);
         addObject(placar, 50, 10);
 
-        setActOrder(Player.class);
 
-        prepare();
+
+        //prepare();
     }
 
     @Override
@@ -90,7 +91,7 @@ public class Mundo1 extends World {
     }
 
     public void prepare() {
-        Sound backgroundMusic = new Sound();
+        Sound backgroundMusic = new Sound("tema.mp3");
         backgroundMusic.play();
     }
 
@@ -137,7 +138,10 @@ public class Mundo1 extends World {
         return timer;
     }
 
+
     public void act() {
+
+        setActOrder(Player.class);
         projetor(proximaCena());
 
         aplicarForcaDaGravidade();
@@ -145,6 +149,10 @@ public class Mundo1 extends World {
 
         contaCiclo();
         DroparInimigo();
+
+
+
+
 
     }
 

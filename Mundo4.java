@@ -59,7 +59,7 @@ public class Mundo4 extends World {
 
         setActOrder(BossFinal.class, Player.class);
 
-        prepare();
+        //prepare();
     }
 
     @Override
@@ -91,7 +91,7 @@ public class Mundo4 extends World {
     }
 
     public void prepare() {
-        Sound backgroundMusic = new Sound();
+        Sound backgroundMusic = new Sound("tema.mp3");
         backgroundMusic.play();
     }
 

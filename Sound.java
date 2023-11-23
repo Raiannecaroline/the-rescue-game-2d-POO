@@ -4,11 +4,14 @@ import java.io.*;
 
 public class Sound extends Actor {
     private GreenfootSound sound;
+    public String nomeSom;
 
-    public Sound() {
+    public Sound(String nomeSom) {
         // Carregue o arquivo de áudio
-        sound = new GreenfootSound("tema.mp3");
+        sound = new GreenfootSound(nomeSom);
+        
     }
+    
 
     public void play() {
         // Reproduza a trilha sonora

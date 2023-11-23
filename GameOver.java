@@ -16,7 +16,7 @@ public class GameOver extends World
     }
     public void act(){
         String key = Greenfoot.getKey();
-        if("enter".equals(key)){
+        if("escape".equals(key)){
             Greenfoot.setWorld(new Menu());
         }
     }

@@ -77,7 +77,7 @@ public class Mundo3 extends World {
             addObject(air, 699, posicaoInimigo);
 
         }
-        if (DropInimigo == 1) {
+        if (posicaoBolaFogo == 1) {
             BolaFogo bolaFogo = new BolaFogo();
             addObject(bolaFogo, posicaoBolaFogo, 50);
         }
@@ -88,7 +88,7 @@ public class Mundo3 extends World {
     }
 
     public void prepare() {
-        Sound backgroundMusic = new Sound();
+        Sound backgroundMusic = new Sound("tema.mp3");
         backgroundMusic.play();
     }
 

@@ -58,5 +58,6 @@ public class Vida extends Actor {
             return new GreenfootImage("");
         }
     }
+}
 
 }
