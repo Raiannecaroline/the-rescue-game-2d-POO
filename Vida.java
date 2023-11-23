@@ -1,6 +1,6 @@
 import greenfoot.*;
 
-public class Vida extends Actor{
+public class Vida extends Actor {
     public String NOME_ARQUIVO_IMAGEM = "life/life-";
     public String EXTENSAO_ARQUIVO_IMAGEM = ".png";
 
@@ -31,23 +31,27 @@ public class Vida extends Actor{
     }
 
     public void exibirVida() {
-        /*if (player.getVidas() == 3) {
-
-        }
-        Vida vida = new Vida(mundo.getHeroi());
-        mundo.addObject(vida, 50, 50);*/
+        /*
+         * if (player.getVidas() == 3) {
+         * 
+         * }
+         * Vida vida = new Vida(mundo.getHeroi());
+         * mundo.addObject(vida, 50, 50);
+         */
     }
 
     private GreenfootImage criaImagem() {
-    if (player instanceof Player) {
-        Player playerCast = (Player) player;
-        return new GreenfootImage(NOME_ARQUIVO_IMAGEM + playerCast.getIdentificadorPlayer() + EXTENSAO_ARQUIVO_IMAGEM);
-    } else if (player instanceof PlayerAir) {
-        PlayerAir playerAirCast = (PlayerAir) player;
-        return new GreenfootImage(NOME_ARQUIVO_IMAGEM + playerAirCast.getIdentificadorPlayer() + EXTENSAO_ARQUIVO_IMAGEM);
-    } else {
-        return new GreenfootImage(""); // Ou outra imagem padrão, se aplicável
+        if (player instanceof Player) {
+            Player playerCast = (Player) player;
+            return new GreenfootImage(
+                    NOME_ARQUIVO_IMAGEM + playerCast.getIdentificadorPlayer() + EXTENSAO_ARQUIVO_IMAGEM);
+        } else if (player instanceof PlayerAir) {
+            PlayerAir playerAirCast = (PlayerAir) player;
+            return new GreenfootImage(
+                    NOME_ARQUIVO_IMAGEM + playerAirCast.getIdentificadorPlayer() + EXTENSAO_ARQUIVO_IMAGEM);
+        } else {
+            return new GreenfootImage(""); // Ou outra imagem padrão, se aplicável
+        }
     }
-}
 
 }

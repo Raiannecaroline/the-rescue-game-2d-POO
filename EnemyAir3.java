@@ -19,10 +19,9 @@ public class EnemyAir3 extends Personagem {
 
     public EnemyAir3() {
 
-        super("helicopter/helicopter-1-3", ".png", 5, 0,3, 0);
+        super("helicopter/helicopter-players-1", ".png", 5, 0, 5, 0);
 
     }
-
 
     public void act() {
         super.act();
@@ -49,27 +48,19 @@ public class EnemyAir3 extends Personagem {
         DisparoEnemy ataque = new DisparoEnemy();
 
         if (latencia == 1) {
-             ataque.playSomDisparo();
+            ataque.playSomDisparo();
             getWorld().addObject(ataque, getX(), getY());
-            ataque.setRotation(-90);
         }
     }
 
     private void movimentacao() {
         // UsarAnimacao();
 
-       if(getX() >50){
-           move(-3);
-       }
-            // ataca();
-
+        if (getX() > 50) {
+            move(-3);
+        }
+        // ataca();
 
     }
-
-
-
-
-
-
 
 }
