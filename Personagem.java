@@ -82,5 +82,8 @@ public class Personagem extends Actor {
     private boolean possoAtualizar() {
         return (cicloAtual() % TAXA_DE_ATUALIZACAO) == 0;
     }
+    
+    
+     
 
 }

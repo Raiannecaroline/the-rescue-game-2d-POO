@@ -36,6 +36,7 @@ public class Player extends Personagem {
     
     private boolean transparency = false; 
     private int transparentDuration = 600;
+    private AnimacaoDano animaDano = new AnimacaoDano();
     
     
 
@@ -96,14 +97,11 @@ public class Player extends Personagem {
             removeTouching(DisparoEnemy.class);
             vidas--;
             if(vidas> 1){
-                
-           
+
             Sound dano = new Sound("somhit.wav");
               dano.play();
-           
-             }
-              
 
+             }
             if (vidas == 0) {
 
                 morte1 = true;
@@ -111,9 +109,10 @@ public class Player extends Personagem {
                  morte.play();
 
                 getWorld().removeObject(this);
+                return;
 
             }
-
+        
         }
 
     }
@@ -139,7 +138,7 @@ public class Player extends Personagem {
 
     private DisparoPlayer criarTiro() {
         DisparoPlayer tiro = new DisparoPlayer();
-          setTransparency(50);
+          
         tiro.playSomDisparo();
         this.atirando = true;
         return tiro;
@@ -280,6 +279,10 @@ public class Player extends Personagem {
     private boolean possoAtualizar() {
 
         return (cicloAtual() % TAXA_DE_ATUALIZACAO) == 0;
+    }
+    private boolean possoTirarAnimacao() {
+
+        return (cicloAtual() % 4) == 0;
     }
 
     public int cicloAtual() {

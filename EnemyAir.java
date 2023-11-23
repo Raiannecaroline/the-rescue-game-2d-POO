@@ -16,6 +16,7 @@ public class EnemyAir extends Personagem {
     private int DropInimigo = Greenfoot.getRandomNumber(10);
     private Personagem animacao;
     private List<DisparoPlayer> disparosSofridos;
+    private AnimacaoDano animaDano = new AnimacaoDano();
 
     public EnemyAir() {
 
@@ -36,12 +37,16 @@ public class EnemyAir extends Personagem {
     private void morte() {
         if (isTouching(DisparoPlayer.class)) {
             removeTouching(DisparoPlayer.class);
-            vida--;
+            vida--;getWorld().addObject(animaDano, this.getX(), this.getY());
+             if (vida <=3){
+                getWorld().removeObject(animaDano);
+            
             if (vida == 0) {
                 getWorld().removeObject(this);
                 Sound morte = new Sound("morteenemy.wav");
                 morte.play();
             }
+        }
         }
     }
 
