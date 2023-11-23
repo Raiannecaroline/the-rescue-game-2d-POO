@@ -27,7 +27,6 @@ public class Mundo1 extends World {
 
     public int timer = 0;
     public int timerBoss = 10;
-     private boolean pausado = false;
 
     private Boss1 boss;
 
@@ -48,16 +47,14 @@ public class Mundo1 extends World {
 
         addObject(vidaHeroi, 30, 10);
         addObject(vidaHeroi2, 670, 10);
-        addObject(placarVidaHeroi, 25, 25);
-        addObject(placarVidaHeroi2, 675, 25);
+        //addObject(placarVidaHeroi, 25, 25);
+        //addObject(placarVidaHeroi2, 675, 25);
 
         addObject(heroi, 60, NIVEL_DO_SOLO);
         addObject(heroi2, 80, NIVEL_DO_SOLO);
-        addObject(placar, 50, 10);
+        //addObject(placar, 50, 10);
 
-
-
-        //prepare();
+        // prepare();
     }
 
     @Override
@@ -138,7 +135,6 @@ public class Mundo1 extends World {
         return timer;
     }
 
-
     public void act() {
 
         setActOrder(Player.class);
@@ -149,10 +145,6 @@ public class Mundo1 extends World {
 
         contaCiclo();
         DroparInimigo();
-
-
-
-
 
     }
 

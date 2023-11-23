@@ -59,5 +59,3 @@ public class Vida extends Actor {
         }
     }
 }
-
-}
