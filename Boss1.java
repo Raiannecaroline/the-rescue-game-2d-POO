@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Boss1 extends Personagem {
 
-    public int vida = 10;
+    public int vida = 30;
 
     private int raioDeteccao = 700;
     private int raioAtaque = 200;
@@ -39,6 +39,10 @@ public class Boss1 extends Personagem {
         if (isTouching(DisparoPlayer.class)) {
             removeTouching(DisparoPlayer.class);
             vida--;
+            if(vida <=7){
+                Sound morte = new Sound("deadsoundBoss.wav");
+              morte.play();
+            }
             if (vida == 0) {
                 getWorld().removeObject(this);
                 Greenfoot.setWorld(new Mundo2());

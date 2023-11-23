@@ -86,7 +86,7 @@ public class Mundo2 extends World {
     }
 
     public void prepare() {
-        Sound backgroundMusic = new Sound();
+        Sound backgroundMusic = new Sound("tema.mp3");
         backgroundMusic.play();
     }
 

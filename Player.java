@@ -33,6 +33,13 @@ public class Player extends Personagem {
 
     private Vida BarraDevida1;
     private Vida BarraDevida2;
+    
+    private boolean transparency = false; 
+    private int transparentDuration = 600;
+    
+    
+
+     
 
     public Player(int vidas) {
         this.vidas = vidas;
@@ -41,6 +48,7 @@ public class Player extends Personagem {
         // Valor inicial da vida do personagem
 
     }
+    
 
     public Player(int vidas, int identificadorPlayer) {
         this.vidas = vidas;
@@ -68,22 +76,39 @@ public class Player extends Personagem {
     }
 
     public void act() {
+    
+         
 
         morte();
         movimentacao();
         disparo();
 
     }
-
+    public void setTransparency(int t) {
+        GreenfootImage image = getImage();
+        image.setTransparency(t); // Define a transparência da imagem do jogador
+    }
+    
     private void morte() {
 
         if (isTouching(DisparoEnemy.class)) {
+          
             removeTouching(DisparoEnemy.class);
             vidas--;
+            if(vidas> 1){
+                
+           
+            Sound dano = new Sound("somhit.wav");
+              dano.play();
+           
+             }
+              
 
             if (vidas == 0) {
 
                 morte1 = true;
+                 Sound morte = new Sound("deadplayer.wav");
+                 morte.play();
 
                 getWorld().removeObject(this);
 
@@ -106,6 +131,7 @@ public class Player extends Personagem {
     private boolean deveAtirar() {
         return Greenfoot.isKeyDown(Atirar);
     }
+    
 
     private boolean isAtirando() {
         return this.atirando;
@@ -113,6 +139,7 @@ public class Player extends Personagem {
 
     private DisparoPlayer criarTiro() {
         DisparoPlayer tiro = new DisparoPlayer();
+          setTransparency(50);
         tiro.playSomDisparo();
         this.atirando = true;
         return tiro;

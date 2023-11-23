@@ -39,6 +39,8 @@ public class EnemyAir extends Personagem {
             vida--;
             if (vida == 0) {
                 getWorld().removeObject(this);
+                Sound morte = new Sound("morteenemy.wav");
+                morte.play();
             }
         }
     }
