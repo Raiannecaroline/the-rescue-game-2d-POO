@@ -8,20 +8,18 @@ import java.util.List;
  * @version (a version number or a date)
  */
 public class Boss1 extends Personagem {
-
-    public int vida = 10;
+    private int vidaMaxima = 100;
+    private int vidaAtual;
 
     private int raioDeteccao = 700;
     private int raioAtaque = 200;
-    private int DropInimigo = Greenfoot.getRandomNumber(10);
-    private Personagem animacao;
-    private List<DisparoPlayer> disparosSofridos;
     private int tempoUltimoDisparo = 0;
-    private static final int INTERVALO_DE_DISPARO = 30;
+    private static final int INTERVALO_DE_DISPARO = 5;
 
     public Boss1() {
 
         super("boss-cenario-1/boss-cenario", ".png", 5, 0, 3, 0);
+        vidaAtual = vidaMaxima;
 
     }
 
@@ -38,8 +36,8 @@ public class Boss1 extends Personagem {
 
         if (isTouching(DisparoPlayer.class)) {
             removeTouching(DisparoPlayer.class);
-            vida--;
-            if (vida == 0) {
+            vidaAtual--;
+            if (vidaAtual == 0) {
                 getWorld().removeObject(this);
                 Greenfoot.setWorld(new Mundo2());
             }
@@ -65,13 +63,21 @@ public class Boss1 extends Personagem {
     }
 
     private void movimentacao() {
-        
+
         if (getX() > 350) {
             move(-3);
         }
 
         // ataca();
 
+    }
+
+    public int getVidaAtual() {
+        return vidaAtual;
+    }
+
+    public int getVidaMaxima() {
+        return vidaMaxima;
     }
 
 }

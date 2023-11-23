@@ -28,6 +28,8 @@ public class Mundo2 extends World {
     public int timer = 0;
     public int timerBoss = 10;
 
+    private Boss2 boss;
+
     public Mundo2() {
 
         super(LARGURA_CENARIO, ALTURA_CENARIO, 1);
@@ -43,14 +45,14 @@ public class Mundo2 extends World {
         Vida vidaHeroi = new Vida(heroi);
         Vida vidaHeroi2 = new Vida(heroi2);
 
-        addObject(vidaHeroi, 10, 25);
-        addObject(vidaHeroi2, 690, 25);
-        addObject(placarVidaHeroi, 25, 25);
-        addObject(placarVidaHeroi2, 675, 25);
+        addObject(vidaHeroi, 30, 10);
+        addObject(vidaHeroi2, 670, 10);
+        //addObject(placarVidaHeroi, 25, 25);
+        //addObject(placarVidaHeroi2, 675, 25);
 
         addObject(heroi, 60, NIVEL_DO_SOLO);
         addObject(heroi2, 80, NIVEL_DO_SOLO);
-        addObject(placar, 50, 10);
+        //addObject(placar, 50, 10);
 
         setActOrder(Player.class);
 
@@ -78,8 +80,10 @@ public class Mundo2 extends World {
             EnemyAir2 air = new EnemyAir2();
             addObject(air, 699, 150);
         }
-        if (timer == timerBoss) {
-            Boss2 boss = new Boss2();
+        if (timer == timerBoss && boss == null) {
+            boss = new Boss2();
+            VidaBoss vidaBoss = new VidaBoss(boss);
+            addObject(vidaBoss, 350, 20);
             addObject(boss, 699, 50);
         }
 

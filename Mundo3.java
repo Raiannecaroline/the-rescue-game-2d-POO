@@ -43,14 +43,14 @@ public class Mundo3 extends World {
         Vida vidaHeroi = new Vida(heroi);
         Vida vidaHeroi2 = new Vida(heroi2);
 
-        addObject(vidaHeroi, 10, 25);
-        addObject(vidaHeroi2, 690, 25);
-        addObject(placarVidaHeroi, 25, 25);
-        addObject(placarVidaHeroi2, 675, 25);
+        addObject(vidaHeroi, 30, 10);
+        addObject(vidaHeroi2, 670, 10);
+        //addObject(placarVidaHeroi, 25, 25);
+        //addObject(placarVidaHeroi2, 675, 25);
 
         addObject(heroi, 60, NIVEL_DO_SOLO);
         addObject(heroi2, 80, NIVEL_DO_SOLO);
-        addObject(placar, 50, 10);
+        //addObject(placar, 50, 10);
 
         setActOrder(PlayerAir.class);
 
