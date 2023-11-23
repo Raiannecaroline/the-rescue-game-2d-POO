@@ -4,39 +4,40 @@ public abstract class Personagem extends Actor {
     private String nomeImagem;
     private String extensaoImagem;
     private int taxaAtualizacao;
-    private int proximoPasso;
+    private int proximoPasso = 0;
     private int quantidadeAnimacoes;
-    private int valorInicial;
-    private int vida;
+    private int valorInicial = 0;
+    private int vidaMaxima;
+    private int vidaAtual;
     private int cicloAtual;
     private Class<? extends Disparo> disparoRival;
     private boolean morto = false;
 
-
-
     public Personagem(
-            String nomeImagem, String extensaoImagem, int taxaAtualizacao, int proximoPasso, int quantidadeAnimacoes,
-            int valorInicial, int vida, Class<? extends Disparo> disparoRival) {
+            String nomeImagem, String extensaoImagem, int taxaAtualizacao, int quantidadeAnimacoes,
+            int vidaMaxima, Class<? extends Disparo> disparoRival) {
 
         this.nomeImagem = nomeImagem;
         this.extensaoImagem = extensaoImagem;
         this.taxaAtualizacao = taxaAtualizacao;
-        this.proximoPasso = proximoPasso;
         this.quantidadeAnimacoes = quantidadeAnimacoes;
-        this.valorInicial = valorInicial;
-        this.vida = vida;
+        this.vidaMaxima = vidaMaxima;
         this.disparoRival = disparoRival;
+
+        this.vidaAtual = vidaMaxima;
 
         setImage(nomeImagem + "-" + valorInicial + extensaoImagem);
     }
 
     public void act() {
         setCicloAtual();
-        Animacao();
+        animacao();
+        movimentacao();
         morte(disparoRival);
+        ataque();
     }
 
-    public void Animacao() {
+    public void animacao() {
 
         setImage(new GreenfootImage(
                 nomeImagem + "-" + proximoPasso + extensaoImagem));
@@ -57,12 +58,8 @@ public abstract class Personagem extends Actor {
         return (getCicloAtual() % taxaAtualizacao) == 0;
     }
 
-    public int getVida() {
-        return vida;
-    }
-
-    public void danoSofrido() {
-        this.vida = vida--;
+    public int getVidaMaxima() {
+        return vidaMaxima;
     }
 
     public int getCicloAtual() {
@@ -83,8 +80,8 @@ public abstract class Personagem extends Actor {
     public void morte(Class<? extends Disparo> disparoRival) {
         if (isTouching(disparoRival)) {
             removeTouching(disparoRival);
-            vida--;
-            if (vida == 0) {
+            vidaAtual--;
+            if (vidaAtual == 0) {
                 setMorto();
                 getWorld().removeObject(this);
             }
@@ -105,5 +102,9 @@ public abstract class Personagem extends Actor {
 
     public void setMorto() {
         this.morto = true;
+    }
+
+    public int getVidaAtual() {
+        return vidaAtual;
     }
 }

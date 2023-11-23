@@ -3,10 +3,12 @@ import greenfoot.*;
 public class BossFinal extends EnemyBase {
     private int tempoUltimoDisparo = 0;
     private static final int INTERVALO_DE_DISPARO = 15;
+    private static int vidaMaxima = 100;
+    private static int taxaAtualizacao = 5;
+    private static int quantidadeAnimacoes = 8;
 
-    public BossFinal(String nomeImagem, String extensaoImagem, int taxaAtualizacao, int proximoPasso,
-            int quantidadeAnimacoes, int valorInicial, int vida, Class<? extends Disparo> disparoRival) {
-                super(nomeImagem, extensaoImagem, taxaAtualizacao, proximoPasso, quantidadeAnimacoes, valorInicial, vida, disparoRival);
+    public BossFinal(String nomeImagem, String extensaoImagem) {
+               super(nomeImagem, extensaoImagem, taxaAtualizacao, quantidadeAnimacoes, vidaMaxima);
             }
 
     public void act() {
@@ -17,7 +19,6 @@ public class BossFinal extends EnemyBase {
         int latencia = Greenfoot.getRandomNumber(50);
         if (latencia == 5 || (tempoUltimoDisparo >= INTERVALO_DE_DISPARO)) {
             tempoUltimoDisparo = 0;
-
 
             int direcaoTiro = 346;
             direcaoTiro -= Greenfoot.getRandomNumber(150);
@@ -32,6 +33,6 @@ public class BossFinal extends EnemyBase {
     }
 
     public void movimentacao() {
-        
+
     }
 }

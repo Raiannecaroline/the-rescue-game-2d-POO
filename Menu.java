@@ -4,14 +4,8 @@ public class Menu extends MundoBase {
     private static final int NUMERO_DE_TECLAS = 3;
     private int tela = 1;
 
-    Menu menu;
-    MundoBase fase1 = new MundoDinamico("mundo1", 336, "cenarios/CenariomovimentIlha/cenario_", ".png", null);
-    MundoEstatico intro = new MundoEstatico("intro_1.png", fase1);
-    MundoBase creditos = new MundoEstatico("autores.png", menu);
-
     public Menu() {
-        super("menu_0" + "1" + ".png");
-        this.menu = this;
+        super("menu_01.png");
     }
 
     public void act() {
@@ -31,10 +25,26 @@ public class Menu extends MundoBase {
                     mudarTela(-1);
                     break;
                 case "enter":
-                    executarOpcao();
+                    proximoMundo();
                     break;
             }
         }
+    }
+
+    @Override
+    public void proximoMundo() {
+        switch (tela) {
+            case 1:
+                Greenfoot.setWorld(new MundoIntro());
+                break;
+            case 2:
+                Greenfoot.setWorld(new MundoCredito());
+                break;
+            case 3:
+                Greenfoot.stop();
+                break;
+        }
+
     }
 
     private void mudarTela(int incremento) {
@@ -44,19 +54,5 @@ public class Menu extends MundoBase {
 
     private void atualizarTela() {
         setBackground("menu_0" + tela + ".png");
-    }
-
-    private void executarOpcao() {
-        switch (tela) {
-            case 1:
-                Greenfoot.setWorld(intro);
-                break;
-            case 2:
-                Greenfoot.setWorld(creditos);
-                break;
-            case 3:
-                Greenfoot.stop();
-                break;
-        }
     }
 }

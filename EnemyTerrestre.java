@@ -2,15 +2,12 @@ import java.util.List;
 import greenfoot.*;
 
 public class EnemyTerrestre extends EnemyBase {
-    public EnemyTerrestre(String nomeImagem, String extensaoImagem, int taxaAtualizacao, int proximoPasso,
-            int quantidadeAnimacoes, int valorInicial, int vida, Class<Disparo> disparoRival, int raioDeteccao,
-            int raioAtaque) {
-        super(nomeImagem, extensaoImagem, taxaAtualizacao, proximoPasso, quantidadeAnimacoes, valorInicial, vida,
-                disparoRival);
-    }
+    private static int taxaAtualizacao = 2;
+    private static int quantidadeAnimacoes = 3;
+    private static int vidaMaxima = 5;
 
-    public void act() {
-        movimentacao();
+    public EnemyTerrestre(String nomeImagem, String extensaoImagem) {
+        super(nomeImagem, extensaoImagem, taxaAtualizacao, quantidadeAnimacoes, vidaMaxima);
     }
 
     public void ataque() {

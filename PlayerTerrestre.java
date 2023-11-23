@@ -2,23 +2,20 @@ import greenfoot.*;
 
 public class PlayerTerrestre extends PlayerBase {
     private String pular;
-
+    private static int taxaAtualizacao = 2;
+    private static int quantidadeAnimacoes = 11;
+    private static boolean terrestre = true;
     public static final int ALTURA_MAXIMA_PULO = 6;
 
-    private boolean estaEmTerraFirme = true;
-    private boolean estaEmPulo = false;
+    private boolean emTerraFirme = true;
+    private boolean emPulo = false;
     private int alturaAtualDoPulo = 0;
 
-    public PlayerTerrestre(String nomeImagem, String extensaoImagem, int taxaAtualizacao, int proximoPasso,
-            int quantidadeAnimacoes, int valorInicial, int vida,
-            Class<? extends Disparo> disparoRival, int identificadorPlayer,
-            String direita, String esquerda, String atirar, String cima, String pular) {
-        super(nomeImagem, extensaoImagem, taxaAtualizacao, proximoPasso, quantidadeAnimacoes, valorInicial, vida, disparoRival, vida, direita, esquerda, atirar, cima);
+    public PlayerTerrestre(String nomeImagem, String extensaoImagem, int identificadorPlayer, String direita,
+            String esquerda, String atirar, String cima, String pular) {
+        super(nomeImagem, extensaoImagem, taxaAtualizacao, quantidadeAnimacoes, identificadorPlayer, direita, esquerda,
+                atirar, cima, terrestre);
         this.pular = pular;
-    }
-
-    public void act() {
-        movimentacao();
     }
 
     private void gerenciamentoDoPulo() {
@@ -36,8 +33,8 @@ public class PlayerTerrestre extends PlayerBase {
         if (alturaAtual() != 0 || timer()) {
             if (Greenfoot.isKeyDown(pular)) {
 
-                estaEmTerraFirme = false;
-                estaEmPulo = true;
+                emTerraFirme = false;
+                emPulo = true;
 
             }
         }
@@ -61,7 +58,7 @@ public class PlayerTerrestre extends PlayerBase {
     }
 
     private void executaSubidaDoPulo() {
-        if (alturaAtualDoPulo < ALTURA_MAXIMA_PULO && estaEmPulo) {
+        if (alturaAtualDoPulo < ALTURA_MAXIMA_PULO && emPulo) {
             alturaAtualDoPulo++;
             setLocation(getX(), getY() - MundoDinamico.getForcaGravidade() * 2);
 
@@ -70,21 +67,21 @@ public class PlayerTerrestre extends PlayerBase {
 
     private void executaApiceDoPulo() {
         if (alturaAtualDoPulo == ALTURA_MAXIMA_PULO) {
-            estaEmPulo = false;
+            emPulo = false;
 
         }
     }
 
     private void executaDescidaDoPulo() {
-        if (alturaAtualDoPulo > 0 && !estaEmPulo) {
+        if (alturaAtualDoPulo > 0 && !emPulo) {
             alturaAtualDoPulo--;
 
         }
     }
 
     private void executaPousoDoPulo() {
-        if (alturaAtualDoPulo == 0 && !estaEmPulo) {
-            estaEmTerraFirme = true;
+        if (alturaAtualDoPulo == 0 && !emPulo) {
+            emTerraFirme = true;
 
         }
     }
@@ -104,5 +101,9 @@ public class PlayerTerrestre extends PlayerBase {
         MundoDinamico mundo = (MundoDinamico) getWorld();
 
         return (mundo.getCicloAtual() % 106) == 0;
+    }
+
+    public boolean isEmTerraFirme() {
+        return emTerraFirme;
     }
 }

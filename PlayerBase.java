@@ -7,23 +7,19 @@ public abstract class PlayerBase extends Personagem {
     private String cima;
     private int identificadorPlayer;
     private boolean atirando = false;
+    private static int vidaMaxima = 5;
+    private static Class<? extends Disparo> disparoRival = DisparoEnemy.class;
+    private boolean terrestre;
 
-    public PlayerBase(String nomeImagem, String extensaoImagem, int taxaAtualizacao, int proximoPasso,
-            int quantidadeAnimacoes, int valorInicial, int vida,
-            Class<? extends Disparo> disparoRival, int identificadorPlayer,
-            String direita, String esquerda, String atirar, String cima) {
-        super(nomeImagem, extensaoImagem, taxaAtualizacao, proximoPasso, quantidadeAnimacoes, valorInicial, vida,
-                disparoRival);
+    public PlayerBase(String nomeImagem, String extensaoImagem, int taxaAtualizacao, int quantidadeAnimacoes,
+            int identificadorPlayer, String direita, String esquerda, String atirar, String cima, boolean terrestre) {
+        super(nomeImagem, extensaoImagem, taxaAtualizacao, quantidadeAnimacoes, vidaMaxima, disparoRival);
         this.identificadorPlayer = identificadorPlayer;
         this.direita = direita;
         this.esquerda = esquerda;
         this.atirar = atirar;
         this.cima = cima;
-    }
-
-    public void act() {
-        morte(getDisparoRival());
-        ataque();
+        this.terrestre = terrestre;
     }
 
     public void ataque() {
@@ -91,5 +87,9 @@ public abstract class PlayerBase extends Personagem {
 
     public String getCima() {
         return cima;
+    }
+
+    public boolean isTerrestre() {
+        return terrestre;
     }
 }

@@ -11,5 +11,9 @@ public abstract class MundoBase extends World {
         setActOrder(PlayerBase.class);
     }
 
-    public abstract void proximoMundo(MundoBase proximoMundo);
+    public void act() {
+        proximoMundo();
+    }
+
+    public abstract void proximoMundo();
 }

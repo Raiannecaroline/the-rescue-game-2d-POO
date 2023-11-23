@@ -1,13 +1,13 @@
 import greenfoot.*;
 
 public class PlayerAereo extends PlayerBase {
-    public String baixo;
+    private String baixo;
+    private static int taxaAtualizacao = 5;
+    private static int quantidadeAnimacoes = 5;
+    private static boolean terrestre = false;
 
-    public PlayerAereo(String nomeImagem, String extensaoImagem, int taxaAtualizacao, int proximoPasso,
-            int quantidadeAnimacoes, int valorInicial, int vida,
-            Class<? extends Disparo> disparoRival, int identificadorPlayer,
-            String direita, String esquerda, String atirar, String cima, String baixo) {
-        super(nomeImagem, extensaoImagem, taxaAtualizacao, proximoPasso, quantidadeAnimacoes, valorInicial, vida, disparoRival, identificadorPlayer, direita, esquerda, atirar, cima);
+    public PlayerAereo(String nomeImagem, String extensaoImagem, int identificadorPlayer, String direita, String esquerda, String atirar, String cima, String baixo) {
+        super(nomeImagem, extensaoImagem, taxaAtualizacao, quantidadeAnimacoes, identificadorPlayer, direita, esquerda, atirar, cima, terrestre);
         this.baixo = baixo;
     }
 

@@ -1,102 +1,82 @@
 import greenfoot.*;
 
-public class MundoDinamico extends MundoEstatico {
+public abstract class MundoDinamico extends MundoEstatico {
     private static final int QUANTIDADE_DE_QUADROS = 100;
     private static final int TAMANHO_DO_QUADRO = 5;
     private static final int FORCA_DE_GRAVIDADE = 7;
     private static final int TAMANHO_PLACAR = 30;
+    private static final int TIMER_OBJETIVO = 10;
 
     private int alturaSolo;
     private PlayerBase player1;
     private PlayerBase player2;
-    private Placar placar;
     private String nomeImagem;
     private String extensaoImagem;
     private int quadroAtual = 1;
-    private int timerBoss;
     private EnemyBase boss;
+    private boolean terrestre;
 
     public MundoDinamico(String imagemFundo, int alturaSolo, String nomeImagem, String extensaoImagen,
-            MundoBase proximoMundo) {
-        super(imagemFundo, proximoMundo);
+            boolean terrestre) {
+        super(imagemFundo);
         this.alturaSolo = alturaSolo;
         this.nomeImagem = nomeImagem;
         this.extensaoImagem = extensaoImagen;
+        this.terrestre = terrestre;
 
-        this.player1 = new PlayerTerrestre("player/player-1", ".png", 2,
-                1, 11, 0, 5, DisparoEnemy.class,
-                1, "right", "left", "enter", "up", "0");
-        this.player2 = new PlayerTerrestre("player/player-1", ".png", 2,
-                1, 11, 0, 5, DisparoEnemy.class, 2, "right", "left", "enter", "up", "0");
-        this.placar = new Placar(0, TAMANHO_PLACAR);
+        if (terrestre) {
+            this.player1 = new PlayerTerrestre("player/player-1", ".png",
+                    1, "right", "left", "enter", "up", "0");
+            this.player2 = new PlayerTerrestre("player/player-2", ".png", 2, "d", "a", "t", "w", "space");
+        } else {
+            this.player1 = new PlayerAereo("helicopter-players/helicopter-player-1", ".png", 1, "right", "left", "enter", "up", "down");
+            this.player2 = new PlayerAereo("helicopter-players/helicopter-player-2", ".png", 2, "d", "a", "t", "w", "s");
+        }
 
-        Placar placarVidaHeroi = new PlacarVida(player1, TAMANHO_PLACAR);
-        Placar placarVidaHeroi2 = new PlacarVida(player2, TAMANHO_PLACAR);
-        Vida vidaHeroi = new Vida(player1);
-        Vida vidaHeroi2 = new Vida(player2);
+        VidaPlayer vidaplayer1 = new VidaPlayer(getPlayer1());
+        VidaPlayer vidaplayer2 = new VidaPlayer(getPlayer2());
 
-        addObject(vidaHeroi, 10, 25);
-        addObject(vidaHeroi2, 690, 25);
-        addObject(placarVidaHeroi, 25, 25);
-        addObject(placarVidaHeroi2, 675, 25);
+        addObject(vidaplayer1, 30, 10);
+        addObject(vidaplayer2, 670, 10);
         addObject(player1, 60, alturaSolo);
         addObject(player2, 80, alturaSolo);
-        addObject(placar, 50, 10);
     }
 
     public void act() {
         projetor(proximaCena());
-        // aplicarForcaDaGravidade();
-        GamerOver();
-        DroparInimigo();
+        aplicarForcaDaGravidade();
+        gameOver();
+        droparInimigo();
     }
 
-    @Override
-    public void removeObject(Actor object) {
-        if (object instanceof EnemyTerrestre) {
-            placar.atualizaPlacar();
+    public void aplicarForcaDaGravidade() {
+        if (isTerrestre()) {
+            if (!player1.isMorto()) {
+                PlayerTerrestre player1cast = (PlayerTerrestre) player1;
+                if (player1cast.alturaAtual() > 0) {
+                    player1cast.setLocation(player1cast.getX(), player1cast.getY() + FORCA_DE_GRAVIDADE);
+                }
+            }
+            if (!player2.isMorto()) {
+                PlayerTerrestre player2cast = (PlayerTerrestre) player2;
+                if (player2cast.alturaAtual() > 0) {
+                    player2cast.setLocation(player2cast.getX(), player2cast.getY() + FORCA_DE_GRAVIDADE);
+                }
+            }
         }
-        super.removeObject(object);
     }
 
-    @Override
-    public void proximoMundo(MundoBase proximoMundo) {
-        String tecla = Greenfoot.getKey();
+    public abstract void droparInimigo();
 
-        if (getBoss().isMorto()) {
-            Greenfoot.setWorld(proximoMundo);
-        }
-    }
-
-    public void DroparInimigo() {
-
-        int DropInimigo = Greenfoot.getRandomNumber(50);
-        int DropInimigoCeu = Greenfoot.getRandomNumber(200);
-        if (DropInimigo == 1) {
-            EnemyTerrestre inimigo1 = new EnemyTerrestre();
-            addObject(inimigo1, 699, getAlturaSolo());
-
-        }
-        if (DropInimigoCeu == 1 && getTimer() < getTimerBoss()) {
-            EnemyAereo air = new EnemyAereo();
-            addObject(air, 699, 150);
-        }
-        if (getTimer() == getTimerBoss()) {
-            setBoss(new Boss());
-            addObject(getBoss(), 699, 50);
-        }
-
-    }
-
-    private void GamerOver() {
+    private void gameOver() {
         java.util.List<PlayerBase> myActors = getObjects(PlayerBase.class);
 
         if (myActors.isEmpty()) {
-            Greenfoot.setWorld(new GameOver());
+            Greenfoot.setWorld(new MundoGameOver());
         }
     }
 
-    private void projetor(GreenfootImage novaCena) {
+    public void projetor(GreenfootImage novaCena) {
         setBackground(novaCena);
     }
 
@@ -156,14 +136,6 @@ public class MundoDinamico extends MundoEstatico {
         this.player2 = player2;
     }
 
-    public Placar getPlacar() {
-        return placar;
-    }
-
-    public void setPlacar(Placar placar) {
-        this.placar = placar;
-    }
-
     public int getQuadroAtual() {
         return quadroAtual;
     }
@@ -187,15 +159,15 @@ public class MundoDinamico extends MundoEstatico {
         return FORCA_DE_GRAVIDADE;
     }
 
-    public int getTimerBoss() {
-        return timerBoss;
-    }
-
     public EnemyBase getBoss() {
         return boss;
     }
 
     public void setBoss(EnemyBase boss) {
         this.boss = boss;
+    }
+
+    public boolean isTerrestre() {
+        return terrestre;
     }
 }

@@ -1,15 +1,11 @@
 import greenfoot.*;
 
 public class EnemyAereo extends EnemyBase {
-    public EnemyAereo(String nomeImagem, String extensaoImagem, int taxaAtualizacao, int proximoPasso,
-            int quantidadeAnimacoes, int valorInicial, int vida, Class<? extends Disparo> disparoRival) {
-                super(nomeImagem, extensaoImagem, taxaAtualizacao, proximoPasso, quantidadeAnimacoes, valorInicial, vida, disparoRival);
-            }
+    private static int taxaAtualizacao = 5;
+    private static int vidaMaxima = 5;
 
-
-    public void act() {
-        movimentacao();
-        ataque();
+    public EnemyAereo(String nomeImagem, String extensaoImagem, int quantidadeAnimacoes) {
+        super(nomeImagem, extensaoImagem, taxaAtualizacao, quantidadeAnimacoes, vidaMaxima);
     }
 
     public void ataque() {
@@ -18,15 +14,15 @@ public class EnemyAereo extends EnemyBase {
         DisparoEnemy ataque = new DisparoEnemy();
 
         if (latencia == 1) {
-             ataque.playSomDisparo();
+            ataque.playSomDisparo();
             getWorld().addObject(ataque, getX(), getY());
             ataque.setRotation(-90);
         }
     }
 
     public void movimentacao() {
-       if(getX() >50){
-           move(-3);
-       }
+        if (getX() > 50) {
+            move(-3);
+        }
     }
 }
