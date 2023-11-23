@@ -47,12 +47,12 @@ public class Mundo1 extends World {
 
         addObject(vidaHeroi, 30, 10);
         addObject(vidaHeroi2, 670, 10);
-        // addObject(placarVidaHeroi, 25, 25);
-        // addObject(placarVidaHeroi2, 675, 25);
+        addObject(placarVidaHeroi, 25, 25);
+        addObject(placarVidaHeroi2, 675, 25);
 
         addObject(heroi, 60, NIVEL_DO_SOLO);
         addObject(heroi2, 80, NIVEL_DO_SOLO);
-        // addObject(placar, 50, 10);
+        addObject(placar, 50, 10);
 
         setActOrder(Player.class);
 
@@ -73,12 +73,12 @@ public class Mundo1 extends World {
         int DropInimigoCeu = Greenfoot.getRandomNumber(200);
         if (DropInimigo == 1) {
             Enemy inimigo1 = new Enemy();
-            // addObject(inimigo1, 699, 340);
+            addObject(inimigo1, 699, 340);
 
         }
         if (DropInimigoCeu == 1 && timer < timerBoss) {
             EnemyAir air = new EnemyAir();
-            // addObject(air, 699, 150);
+            addObject(air, 699, 150);
         }
         if (timer == timerBoss && boss == null) {
             boss = new Boss1();
@@ -138,7 +138,6 @@ public class Mundo1 extends World {
     }
 
     public void act() {
-
         projetor(proximaCena());
 
         aplicarForcaDaGravidade();
@@ -189,5 +188,4 @@ public class Mundo1 extends World {
         return novoQuadro;
 
     }
-
 }
